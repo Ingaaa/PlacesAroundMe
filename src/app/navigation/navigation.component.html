@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto ml-auto">
+      <li class="nav-item">
+        <a class="nav-link nav-icon" routerLink="/sakums" routerLinkActive="active"><i class="fas fa-globe"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/vietas" routerLinkActive="active">VIETAS</a>
+      </li>
+      <li class="nav-item" *ngIf="logedIn">
+        <a class="nav-link" href="#">FAVORĪTI</a>
+      </li>
+      <li class="nav-item" *ngIf="logedIn">
+        <a class="nav-link" href="#">VĒLOS APMEKLĒT</a>
+      </li>
+      <li class="nav-item" *ngIf="logedIn">
+        <a class="nav-link" href="#">ESMU APMEKLĒJIS</a>
+      </li>
+      <li class="nav-item" *ngIf="logedIn">
+        <a class="nav-link nav-login" href="#"><i class="fas fa-sign-out-alt"></i> IZIET</a>
+      </li>
+      <li class="nav-item" *ngIf="!logedIn">
+        <a class="nav-link nav-login" href="#"><i class="fas fa-sign-in-alt"></i> IENĀKT/REĢISTRĒTIES</a>
+      </li>
+    </ul>
+  </div>
+</nav>

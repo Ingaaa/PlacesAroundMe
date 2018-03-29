@@ -1,0 +1,29 @@
+#map {
+    height: 500px;
+      }
+      .place-card:nth-of-type(4n+1){
+    background-color: #49205E;
+    color: #fff;
+}
+.place-card:nth-of-type(4n+2){
+    background-color: #BC519E;
+    color: #fff;
+}
+.place-card:nth-of-type(4n+3){
+    background-color: #805BA5;
+    color: #fff;
+}
+.place-card:nth-of-type(4n+4){
+    background-color: #D9E254;
+    color: #49205E;
+}
+.place-card{
+    transition: ease-in-out transform .2s, ease-in-out box-shadow .2s; 
+    
+}
+.place-card:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    cursor: pointer;
+}

@@ -1,0 +1,46 @@
+.navbar {
+    background-color: rgba(73, 32, 94, 0.8);
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.navbar a{
+    transition: ease-in-out background-color .15s, ease-in-out color .15s;
+}
+
+.navbar a.nav-link, .navbar a.nav-link:visited{
+    color: #fff;
+}
+
+.navbar a.nav-link.nav-icon{
+    color: #D9E254;
+}
+
+.navbar a.nav-link.nav-login{
+    color: #fff;
+    background-color: #BC519E;
+}
+
+.navbar a.nav-link:hover, .navbar a.nav-link:active, .navbar a.nav-link.active{
+    background-color: #D9E254;
+    color: rgb(73, 32, 94);
+}
+
+nav .navbar-nav .nav-link {
+    line-height: 1.5rem;
+    padding: 1rem;
+}
+.nav-icon>.fas.fa-globe {
+  transition: transform 3s;
+}
+.nav-icon:hover>.fas.fa-globe {
+    transform: rotate(360deg) scale(1.6);
+}
+
+/*.nav-link>.fas.fa-sign-out-alt{
+    transition: transform 3s;
+}
+
+.nav-link:hover>.fas.fa-sign-out-alt{
+    transform: translate(56px, 0px);
+}*/

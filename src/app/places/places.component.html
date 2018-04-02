@@ -15,7 +15,7 @@
           <select class="form-control" name="type" id="type" [(ngModel)]="search.type">
             <option> </option>
             <option *ngFor="let c of categories" [ngValue]="c.value">{{c.title}}</option>
-    </select>
+          </select>
         </div>
         <div class="form-group col-md-3">
           <label for="minPriceLevel">Cenas no</label>
@@ -30,9 +30,9 @@
         <div class="form-group col-md-3">
           <label for="openNow">Ir atvērts</label>
           <select class="form-control" name="openNow" id="openNow" [(ngModel)]="search.openNow">
-      <option> </option>
-      <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
-    </select>
+            <option> </option>
+            <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
+          </select>
         </div>
 
       </div>
@@ -41,7 +41,7 @@
   </form>
   <div id="map"></div>
   <div class="row">
-    <div class="col-md-4 p-3 pb-0 text-center place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}'">
+    <div class="col-md-4 p-3 pb-0 text-center place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
       <div class="my-3 py-3">
         <h2 class="display-5">{{place.name}}</h2>
         <p class="lead">{{place.vicinity}}</p>

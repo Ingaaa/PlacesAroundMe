@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { } from '@types/googlemaps';
 
 
 @Injectable()
@@ -8,6 +9,11 @@ export class Common {
     latitude;
     longitude;
     location;
+
+    openOptions = [
+        { value: true, title: "Jā" },
+        { value: false, title: "Nē" }
+    ];
 
     categories = [
         { value: "money", title: "Nauda" },
@@ -32,6 +38,16 @@ export class Common {
         { value: "bicycle_store", title: "Riteņbraukšanas veikals", category: "Transports" },
         { value: "book_store", title: "Grāmatu veikals", category: "Izklaide" }
     ]
+
+    setLocation(position) {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.location = new google.maps.LatLng(this.latitude, this.longitude);
+    }
+
+    setDefaultLocation() {
+        this.location = new google.maps.LatLng(this.defaultLatitude, this.defaultLongitude);
+    }
 }
 
 

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
+import { Common } from '../common';
+import { AppService } from '../app.service';
+import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-place',
@@ -7,18 +10,28 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./place.component.css']
 })
 export class PlaceComponent implements OnInit {
+  googleMapsService: google.maps.places.PlacesService;
   id;
-  request = {
-  placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-};
-  constructor(private route: ActivatedRoute) {
+  placeSubscription;
+  place = <any>{};
+
+  constructor(
+    private route: ActivatedRoute,
+    private common: Common,
+    private service: AppService,
+  ) {
     this.route.params.subscribe(params => this.id = params['id']);
   }
 
   ngOnInit() {
+    this.googleMapsService = new google.maps.places.PlacesService(document.createElement('div'));
+    this.placeSubscription = this.service.getPlaceDetails(this.googleMapsService, { placeId: this.id, language: "lv" })
+      .subscribe(this.callback.bind(this));
+  }
 
-    service = new google.maps.places.PlacesService(map);
-    service.getDetails(this.request, callback);
+  callback(data) {
+    console.log(data);
+    this.place = data;
   }
 
 }

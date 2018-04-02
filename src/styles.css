@@ -1,3 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "assets/web-fonts-with-css/css/fontawesome-all.min.css"
+@import "assets/web-fonts-with-css/css/fontawesome-all.min.css";
+
+.place-card:nth-of-type(4n+1){
+    background-color: #49205E;
+    color: #fff;
+}
+
+.place-card:nth-of-type(4n+2){
+    background-color: #BC519E;
+    color: #fff;
+}
+.place-card:nth-of-type(4n+3){
+    background-color: #805BA5;
+    color: #fff;
+}
+.place-card:nth-of-type(4n+4){
+    background-color: #D9E254;
+    color: #49205E;
+}
+.place-card{
+    transition: ease-in-out transform .3s; 
+    
+}
+.place-card:hover{
+    transform: scale(1.01);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    cursor: pointer;
+}
+
+.place-card {
+    -webkit-animation: appear .6s linear 1; /* Safari */
+    animation: appear .6s linear 1;
+}
+
+/* Safari */
+@-webkit-keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity:1; }
+    }
+    
+@keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity:1; }
+}

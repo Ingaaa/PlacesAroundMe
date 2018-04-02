@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import {} from '@types/googlemaps';
 import { Common } from '../common';
 
 @Component({
@@ -12,16 +11,9 @@ export class HomeComponent implements OnInit {
 
   googleMapsService;
   places = [];
-  imageSizes = {
-    maxWidth: 140
-  }
-  request = {
-    location: this.common.location,
-    radius: '500',
-    type: ['point_of_interest'],
-    rankby: 'prominence',
-    language: 'lat'
-  };
+  locationSubscription;
+  searchSubscription;
+  loaded: boolean = false;
 
   constructor(
     private service: AppService,
@@ -30,34 +22,25 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.googleMapsService = new google.maps.places.PlacesService(document.createElement('div'));
-
-    this.service.getLocation(function () {
-      this.showPlaces();
-    }.bind(this));
+    this.locationSubscription = this.service.getLocation(false).subscribe(function () {
+      this.searchSubscription = this.service.searchPlaces(this.googleMapsService, {
+        location: this.common.location,
+        radius: '500',
+        type: ['point_of_interest'],
+        rankby: 'prominence'
+      }).subscribe(function (data) {
+        this.places = data;
+        this.loaded = true;
+        console.log(data);
+      }.bind(this))
+    }.bind(this))
   }
-
-  showPlaces() {
-    console.log(this.request);
-    this.googleMapsService.nearbySearch({
-      location: this.common.location,
-      radius: '500',
-      type: ['point_of_interest'],
-      rankby: 'prominence',
-      language: 'lat'
-    }, this.callback.bind(this));
-  }
-
-  callback(data) {
-    this.places = data;
-    console.log(data);
-  };
 
   getPhoto(place) {
     if (place.photos) {
-      return place.photos[0].getUrl(this.imageSizes);
+      return place.photos[0].getUrl({ maxWidth: 140 });
     } else {
       return place.icon;
     }
   }
-
 }

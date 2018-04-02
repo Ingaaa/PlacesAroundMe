@@ -2,22 +2,22 @@
 
   <ngb-carousel class="carousel slide">
     <ng-template ngbSlide>
-      <img src="../../assets/img/home5.jpg" alt="Random first slide" class="img-fluid">
-      <div class="carousel-caption">
+      <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
+      <div class="carousel-caption pb-5">
         <h3>First slide label</h3>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
       </div>
     </ng-template>
     <ng-template ngbSlide>
-      <img src="../../assets/img/home5.jpg" alt="Random first slide" class="img-fluid">
-      <div class="carousel-caption">
+      <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
+      <div class="carousel-caption pb-5">
         <h3>Second slide label</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
     </ng-template>
     <ng-template ngbSlide>
-      <img src="../../assets/img/home4.jpg" alt="Random first slide" class="img-fluid">
-      <div class="carousel-caption">
+      <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
+      <div class="carousel-caption pb-5">
         <h3>Third slide label</h3>
         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
       </div>
@@ -25,6 +25,9 @@
   </ngb-carousel>
 
   <div class="row">
+    <!--<div class="col-md-12 justify-content-center" [ngClass]="{'display': !loaded, 'hide': loaded}">
+      <div class="loader d-flex justify-content-center"></div>
+    </div>-->
     <div class="col-md-4 p-3 pb-0 text-center place-card" *ngFor="let place of places">
       <div class="my-3 py-3">
         <h2 class="display-5">{{place.name}}</h2>

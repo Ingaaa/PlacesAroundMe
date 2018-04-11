@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Common } from './common';
 import { } from '@types/googlemaps';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AppService {
@@ -11,7 +11,7 @@ export class AppService {
     constructor(private http: HttpClient,
         private common: Common) { }
 
-    getLocation(reload) {
+    getLocation(reload: boolean): Observable<any> {
         return new Observable((observer) => {
             if (this.common.location != undefined && reload === false) {
                 observer.next();
@@ -60,9 +60,9 @@ export class AppService {
         })
     }
 
-    getPlaceDetails(googleMapsService, body) {
+    getPlaceDetails(placesService: google.maps.places.PlacesService, body) {
         return new Observable((observer) => {
-            googleMapsService.getDetails(body, function (data) {
+            placesService.getDetails(body, function (data) {
                 observer.next(data);
                 observer.complete();
             }.bind(this));

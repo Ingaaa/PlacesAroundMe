@@ -20,11 +20,10 @@
     color: #49205E;
 }
 .place-card{
-    transition: ease-in-out transform .3s; 
+    transition: box-shadow .3s; 
     
 }
 .place-card:hover{
-    transform: scale(1.01);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
     z-index: 999;
     cursor: pointer;

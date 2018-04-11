@@ -15,6 +15,13 @@ import { Common } from './common';
 import {} from '@types/googlemaps';
 import { ViewChild } from '@angular/core';
 import { PlaceComponent } from './place/place.component';
+import { Observable} from 'rxjs/Observable';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './../environments/environment';
+import { RegistrationComponent } from './registration/registration.component';
 
 const appRoutes: Routes = [
   { path: 'sakums', component: HomeComponent },
@@ -35,7 +42,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     HomeComponent,
     PlacesComponent,
-    PlaceComponent
+    PlaceComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes
-    )
+    ),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
 
   ],
   providers: [

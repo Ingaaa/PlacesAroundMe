@@ -28,7 +28,7 @@
     <!--<div class="col-md-12 justify-content-center" [ngClass]="{'display': !loaded, 'hide': loaded}">
       <div class="loader d-flex justify-content-center"></div>
     </div>-->
-    <div class="col-md-4 p-3 pb-0 text-center place-card" *ngFor="let place of places">
+    <div class="col-md-4 p-3 pb-0 text-center place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
       <div class="my-3 py-3">
         <h2 class="display-5">{{place.name}}</h2>
         <p class="lead">{{place.vicinity}}</p>

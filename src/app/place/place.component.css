@@ -1,0 +1,12 @@
+#placeMap {
+    height: 500px;
+      }
+      .checked {
+    color: orange;
+}
+
+.carousel-item {
+    background-color: lightgray !important;
+    text-align: center !important;
+}
+      

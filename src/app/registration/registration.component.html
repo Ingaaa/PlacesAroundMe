@@ -10,43 +10,37 @@
     <ngb-tabset>
       <ngb-tab title="Ienākt">
         <ng-template ngbTabContent>
-          <form class="pt-5 pb-5" name="loginForm" (ngSubmit)="login()">
-            <div class="container">
-              <div class="row">
-                <div class="form-group col-md-12">
-                  <label for="email">E-pasts</label>
-                  <input type="email" name="email" class="form-control" id="email" [(ngModel)]="form.email" placeholder="name@email.com">
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="password">Parole</label>
-                  <input type="password" name="password" class="form-control" id="password" [(ngModel)]="form.password">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Ieiet</button>
+          <form name="loginForm" class="pt-3 pb-3 pr-2 pl-2" (ngSubmit)="login()">
+            <div class="form-group">
+              <label for="email">E-pasts</label>
+              <input type="email" name="email" class="form-control" id="email" [(ngModel)]="form.email" placeholder="name@email.com">
             </div>
+            <div class="form-group">
+              <label for="password">Parole</label>
+              <input type="password" name="password" class="form-control" id="password" [(ngModel)]="form.password">
+            </div>
+            <button type="submit" class="btn btn-primary">Ieiet</button>
           </form>
+          <a href="#" class="pr-2 pl-2">Aizmirsāt paroli?</a>
         </ng-template>
       </ngb-tab>
+
       <ngb-tab title="Reģistrēties">
         <ng-template ngbTabContent>
-          <form class="pt-5 pb-5" name="registrationForm" (ngSubmit)="register()">
-            <div class="container">
-              <div class="row">
-                <div class="form-group col-md-12">
-                  <label for="email">E-pasts</label>
-                  <input type="email" name="email" class="form-control" id="email" [(ngModel)]="form.email" placeholder="name@email.com">
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="password">Parole</label>
-                  <input type="password" name="password" class="form-control" id="password" [(ngModel)]="form.password">
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="password2">Parole atkārtoti</label>
-                  <input type="password" name="password2" class="form-control" id="password2" [(ngModel)]="form.password2">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Reģistrēties</button>
+          <form class="pt-3 pr-2 pl-2" name="registrationForm" (ngSubmit)="register()">
+            <div class="form-group">
+              <label for="email">E-pasts</label>
+              <input type="email" name="email" class="form-control" id="email" [(ngModel)]="form.email" placeholder="name@email.com">
             </div>
+            <div class="form-group">
+              <label for="password">Parole</label>
+              <input type="password" name="password" class="form-control" id="password" [(ngModel)]="form.password">
+            </div>
+            <div class="form-group">
+              <label for="password2">Parole atkārtoti</label>
+              <input type="password" name="password2" class="form-control" id="password2" [(ngModel)]="form.password2">
+            </div>
+            <button type="submit" class="btn btn-primary">Reģistrēties</button>
           </form>
         </ng-template>
       </ngb-tab>

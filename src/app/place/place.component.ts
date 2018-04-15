@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { Common } from '../common';
 import { AppService } from '../app.service';
-import { } from '@types/googlemaps';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-place',
@@ -16,7 +14,6 @@ export class PlaceComponent implements OnInit {
   place: google.maps.places.PlaceResult;
   map: google.maps.Map;
   id: string;
-  placeSubscription;
   ratings: number[] = [1, 2, 3, 4, 5];
   loaded: boolean = false;
 
@@ -33,27 +30,25 @@ export class PlaceComponent implements OnInit {
       center: this.common.location,
       zoom: 15
     });
-    new google.maps.Marker({ map: this.map, position: this.common.location, title: "Esmu te!" });
+    const marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: 'Esmu te!' });
     this.placesService = new google.maps.places.PlacesService(this.map);
-    this.placeSubscription = this.service.getPlaceDetails(this.placesService, { placeId: this.id, language: "lv" })
-      .subscribe(this.callback.bind(this));
+    this.service.getPlaceDetails(this.placesService, { placeId: this.id })
+      .subscribe({
+        next: this.setPlace,
+        error: () => { },
+        complete: () => { }
+      });
   }
 
-  callback(data) {
+  setPlace = (data) => {
     console.log(data);
 
     this.place = data;
-    new google.maps.Marker({ map: this.map, position: this.place.geometry.location, icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2' });
-
-
-
-    //console.log("error");
-
+    const marker = new google.maps.Marker({
+      map: this.map, position: this.place.geometry.location,
+      icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
+    });
     this.loaded = true;
-    /* this.map = new google.maps.Map(document.getElementById('placeMap'), {
-       center: this.common.location,
-       zoom: 15
-     });*/
   }
 
 }

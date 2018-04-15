@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { RegistrationComponent }  from '../registration/registration.component';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegistrationComponent } from '../registration/registration.component';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,16 +9,40 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+
   @ViewChild(RegistrationComponent) registration: RegistrationComponent;
   logedIn: boolean = false;
-  closeResult: string;
+  isCollapsed: boolean = true;
+  user;
 
-  constructor() { }
+  constructor(private service: AppService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.authState();
+  }
+
+  authState() {
+    this.service.authState().subscribe({
+      next: (user) => {
+        if (user != null && user.uid != null) {
+          this.logedIn = true;
+          this.user = (user);
+          console.log(user);
+        }
+      }
+    });
+  }
 
   openRegistartion() {
     this.registration.open();
+  }
+
+  logOut() {
+    this.registration.logOut();
+  }
+
+  toggleMenu() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
 }

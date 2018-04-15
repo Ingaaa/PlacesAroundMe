@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppService } from '../app.service';
+import { Common } from '../common';
 
 @Component({
   selector: 'app-registration',
@@ -9,40 +9,55 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+
   @ViewChild('registrationModal') registrationModal;
+  @Input('authState') authState;
+  modalRef;
   form = <any>{};
   closeResult: string;
 
   ngOnInit() {
   }
 
-  constructor(private modalService: NgbModal,
-    public angularFire: AngularFireAuth) { }
+  constructor(
+    private modalService: NgbModal,
+    private service: AppService,
+    private common: Common
+  ) { }
 
   register() {
-    this.angularFire.auth.createUserWithEmailAndPassword(this.form.email, this.form.password).then(function (data) {
+    this.service.register(this.form.email, this.form.password).then((data) => {
       console.log(data);
-    }, function (data) {
+      this.modalRef.close();
+      this.authState();
+    }, (error) => {
+      console.log(error);
+      const errorText = this.common.authErrors[error.code];
+    });
+  }
+
+  login() {
+    this.service.signIn(this.form.email, this.form.password).then((data) => {
       console.log(data);
+      this.modalRef.close();
+      this.authState();
+    }, (error) => {
+      console.log(error);
+      const errorText = this.common.authErrors[error.code];
+    });
+  }
+
+  logOut() {
+    this.service.signOut().then((data) => {
+      console.log(data);
+      this.authState();
+    }, (error) => {
+      console.log(error);
+      const errorText = this.common.authErrors[error.code];
     });
   }
 
   open() {
-    this.modalService.open(this.registrationModal).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalRef = this.modalService.open(this.registrationModal);
   }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
 }

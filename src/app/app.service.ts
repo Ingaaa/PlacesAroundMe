@@ -1,71 +1,109 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Common } from './common';
-import { } from '@types/googlemaps';
-import { Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AppService {
-    geo = new google.maps.Geocoder();
+    geo: google.maps.Geocoder = new google.maps.Geocoder();
 
-    constructor(private http: HttpClient,
-        private common: Common) { }
+    constructor(
+        private common: Common,
+        public angularFire: AngularFireAuth) { }
 
     getLocation(reload: boolean): Observable<any> {
+
         return new Observable((observer) => {
-            if (this.common.location != undefined && reload === false) {
+            if (this.common.location != null && reload === false) {
                 observer.next();
                 observer.complete();
             } else {
                 if (navigator.geolocation) {
                     console.log('Geolocation is supported!');
-                    navigator.geolocation.getCurrentPosition(function (position) {
+                    navigator.geolocation.getCurrentPosition((position) => {
                         this.common.setLocation(position);
                         console.log(position);
                         observer.next();
                         observer.complete();
-                    }.bind(this), function () {
+                    }, () => {
                         this.common.setDefaultLocation();
                         observer.next();
                         observer.complete();
-                    }.bind(this));
-                }
-                else {
+                    });
+                } else {
                     console.log('Geolocation is not supported for this Browser/OS.');
                     this.common.setDefaultLocation();
                     observer.next();
                     observer.complete();
                 }
             }
-        })
-    };
+        });
+    }
 
-    searchPlaces(googleMapsService, body) {
+    searchPlaces(googleMapsService: google.maps.places.PlacesService,
+        body: google.maps.places.PlaceSearchRequest): Observable<any> {
+
         return new Observable((observer) => {
-            googleMapsService.nearbySearch(body, function (data) {
-                observer.next(data);
-                observer.complete();
-            }.bind(this));
-        })
-    };
+            googleMapsService.nearbySearch(body,
+                (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        observer.next(data);
+                    } else {
+                        observer.error(data);
+                    }
+                    observer.complete();
+                });
+        });
+    }
 
-    geoCode() {
+    geoCode(): Observable<any> {
+
         return new Observable((observer) => {
             this.geo.geocode({
                 location: this.common.location
-            }, function (data) {
-                observer.next(data);
+            }, (data: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    observer.next(data);
+                } else {
+                    observer.error(data);
+                }
                 observer.complete();
-            }.bind(this));
-        })
+            });
+        });
     }
 
-    getPlaceDetails(placesService: google.maps.places.PlacesService, body) {
+    getPlaceDetails(placesService: google.maps.places.PlacesService, body: google.maps.places.PlaceDetailsRequest): Observable<any> {
+
         return new Observable((observer) => {
-            placesService.getDetails(body, function (data) {
-                observer.next(data);
+            placesService.getDetails(body, (data: google.maps.places.PlaceResult, status: google.maps.places.PlacesServiceStatus) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    observer.next(data);
+                } else {
+                    observer.error(data);
+                }
                 observer.complete();
-            }.bind(this));
-        })
+            });
+        });
+    }
+
+    register(email: string, password: string) {
+        return this.angularFire.auth.createUserWithEmailAndPassword(email, password);
+    }
+
+    signIn(email: string, password: string) {
+        return this.angularFire.auth.signInWithEmailAndPassword(email, password);
+    }
+
+    resetPassword(email: string) {
+        return this.angularFire.auth.sendPasswordResetEmail(email);
+    }
+
+    signOut() {
+        return this.angularFire.auth.signOut();
+    }
+
+    authState(): Observable<firebase.User> {
+        return this.angularFire.authState;
     }
 }

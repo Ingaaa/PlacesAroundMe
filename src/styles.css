@@ -1,46 +1,105 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "assets/web-fonts-with-css/css/fontawesome-all.min.css";
+a, a:visited {
+    color: rgb(73, 32, 94);
+}
 
-.place-card:nth-of-type(4n+1){
+a:hover, a:active {
+    color: #BC519E;
+}
+
+button:focus {
+    outline: none;
+}
+
+.btn.btn-primary:focus, .btn.btn-primary.focus, .btn.btn-primary:active, {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    color: #BC519E;
+}
+
+.btn.btn-primary {
+    background-color: #49205E;
+    border: none;
+    transition: box-shadow .3s;
+}
+
+.btn.btn-primary:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+.btn.btn-outline-dark {
+    color: #49205E;
+    border-color: #49205E;
+}
+
+.btn.btn-outline-dark:hover, .btn.btn-outline-dark:active {
+    color: #fff;
+    border-color: #49205E;
+    background-color: #49205E;
+}
+
+.place-card:nth-of-type(4n+1) {
     background-color: #49205E;
     color: #fff;
 }
 
-.place-card:nth-of-type(4n+2){
+.place-card:nth-of-type(4n+2) {
     background-color: #BC519E;
     color: #fff;
 }
-.place-card:nth-of-type(4n+3){
+
+.place-card:nth-of-type(4n+3) {
     background-color: #805BA5;
     color: #fff;
 }
-.place-card:nth-of-type(4n+4){
+
+.place-card:nth-of-type(4n+4) {
     background-color: #D9E254;
     color: #49205E;
 }
-.place-card{
-    transition: box-shadow .3s; 
-    
-}
-.place-card:hover{
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-    z-index: 999;
-    cursor: pointer;
+
+.place-card .fas.fa-globe {
+    font-size: 140px;
 }
 
 .place-card {
-    -webkit-animation: appear .6s linear 1; /* Safari */
+    transition: box-shadow .3s;
+    -webkit-animation: appear .6s linear 1;
+    /* Safari */
     animation: appear .6s linear 1;
 }
 
+.place-card:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    cursor: pointer;
+    outline: none;
+}
+
 /* Safari */
+
 @-webkit-keyframes appear {
-    0% { opacity: 0; }
-    100% { opacity:1; }
+    0% {
+        opacity: 0;
     }
-    
+    100% {
+        opacity: 1;
+    }
+}
+
 @keyframes appear {
-    0% { opacity: 0; }
-    100% { opacity:1; }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.rounded-photo {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
 }

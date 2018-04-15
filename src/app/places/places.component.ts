@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Common } from '../common';
 import { AppService } from '../app.service';
-import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-places',
@@ -15,12 +14,9 @@ export class PlacesComponent implements OnInit {
   googleAutocompleteService: google.maps.places.Autocomplete;
   googleMapsService: google.maps.places.PlacesService;
   marker: google.maps.Marker;
-  places = [];
+  places: google.maps.places.PlaceResult[];
   categories = this.common.categories;
   openOptions = this.common.openOptions;
-  locationSubscription;
-  geoCodeSubscription;
-  searchSubscription;
 
   constructor(
     private common: Common,
@@ -28,52 +24,72 @@ export class PlacesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.googleAutocompleteService = new google.maps.places.Autocomplete(<HTMLInputElement>document.getElementById('location'))
+    this.googleAutocompleteService = new google.maps.places.Autocomplete(<HTMLInputElement>document.getElementById('location'));
 
-    this.locationSubscription = this.service.getLocation(false).subscribe(function () {
-      this.map = new google.maps.Map(document.getElementById('map'), {
-        center: this.common.location,
-        zoom: 15
-      });
-      this.marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: "Esmu te!" });
-      this.googleMapsService = new google.maps.places.PlacesService(this.map);
+    this.service.getLocation(false).subscribe({
+      next: this.setLocation,
+      error: () => { },
+      complete: () => { }
+    });
+  }
 
-      this.geoCodeSubscription = this.service.geoCode().subscribe(function (data) {
+  setLocation = () => {
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: this.common.location,
+      zoom: 15
+    });
+    const marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: 'Esmu te!' });
+    this.googleMapsService = new google.maps.places.PlacesService(this.map);
+
+    this.service.geoCode().subscribe({
+      next: (data) => {
         this.search.location = data[0].formatted_address;
-        console.log(data);
-      }.bind(this))
-    }.bind(this));
+      },
+      error: () => { },
+      complete: () => { }
+    });
   }
 
   searchPlaces() {
-    console.log(this.googleAutocompleteService.getPlace());
-    var body = this.copyObject(this.search);
-    if (this.googleAutocompleteService.getPlace() !== undefined) {
+    const body = this.copyObject(this.search);
+    if (this.googleAutocompleteService.getPlace() != null) {
       body.location = this.googleAutocompleteService.getPlace().geometry.location;
     } else {
       body.location = this.common.location;
     }
-    body.radius = '500';
-    this.searchSubscription = this.service.searchPlaces(this.googleMapsService, body).subscribe(this.callback.bind(this));
+    body.radius = 500;
+    this.service.searchPlaces(this.googleMapsService, body).subscribe({
+      next: this.setPlaces,
+      error: () => { },
+      complete: () => { }
+    });
   }
 
-  callback(data) {
-    console.log(data);
+  setPlaces = (data) => {
     this.places = data;
-    for (var i = 0; i < this.places.length; i++) {
-      new google.maps.Marker({ map: this.map, position: this.places[i].geometry.location, icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2' });
+    for (let i = 0; i < this.places.length; i++) {
+      const marker = new google.maps.Marker({
+        map: this.map, position: this.places[i].geometry.location,
+        icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
+      });
     }
   }
 
   copyObject(object) {
-    var newObj = <any>{};
-    var keys = Object.keys(object);
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      if (object[key] !== undefined && object[key] !== null && object[key] !== "") {
+    const newObj = <any>{};
+    const keys = Object.keys(object);
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (object[key] != null && object[key] !== '') {
         newObj[key] = object[key];
       }
     }
     return newObj;
+  }
+
+  getPhoto(place) {
+    if ((place.photos != null) && place.photos.length > 0) {
+      return place.photos[0].getUrl({ maxWidth: 140 });
+    }
   }
 }

@@ -103,3 +103,7 @@ button:focus {
     background-size: cover;
     background-position: center center;
 }
+
+.navbar-margin {
+    margin-top: 56px;
+}

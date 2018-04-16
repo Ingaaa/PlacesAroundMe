@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListsComponent implements OnInit {
 
+  lists = [
+    { key: 'favourites', value: 'Favorīti' },
+    { key: 'toVisit', value: 'Vēlos apmeklēt' },
+    { key: 'visited', value: 'Esmu apmeklējis' },
+  ];
+
   constructor() { }
 
   ngOnInit() {

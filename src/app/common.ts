@@ -8,6 +8,7 @@ export class Common {
     latitude: number;
     longitude: number;
     location: google.maps.LatLng;
+    geolocationPermissions: boolean = false;
 
     readonly openOptions = [
         { value: true, title: 'Jā' },
@@ -75,11 +76,22 @@ export class Common {
     ];
 
     readonly authErrors = {
-        'auth/email-already-in-use': 'E-pasts ... jau ir reģistrēts',
-        'auth/invalid-email': '',
-        'auth/weak-password': '',
-        'auth/user-not-found': 'Lietotājs ar e-pasta adresi ... nav atrasts'
+        'auth/email-already-in-use': 'E-pasts jau ir reģistrēts.',
+        'auth/invalid-email': 'E-pastam ir nederīgs formāts',
+        'auth/weak-password': 'Parolei ir jāsatur vismaz 6 simbli ',
+        'auth/user-not-found': 'Lietotājs ar e-pasta adresi nav atrasts.',
+        'passwords_doesnt_match': 'Paroles nesakrīt.',
+        'auth/wrong-password': 'E-pasts vai parole ir nepareiza.',
+        'default_error_text': 'Radās nezināma kļūda.'
     };
+
+    getErrorText(key): string {
+        if (this.authErrors[key] != null) {
+            return this.authErrors[key];
+        } else {
+            return this.authErrors['default_error_text'];
+        }
+    }
 
     setLocation(position) {
         this.latitude = position.coords.latitude;

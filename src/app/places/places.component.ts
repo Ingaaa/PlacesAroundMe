@@ -53,6 +53,7 @@ export class PlacesComponent implements OnInit {
   searchPlaces() {
     const body = this.copyObject(this.search);
     if (this.googleAutocompleteService.getPlace() != null) {
+      console.log(this.googleAutocompleteService.getPlace());
       body.location = this.googleAutocompleteService.getPlace().geometry.location;
     } else {
       body.location = this.common.location;
@@ -70,7 +71,8 @@ export class PlacesComponent implements OnInit {
     for (let i = 0; i < this.places.length; i++) {
       const marker = new google.maps.Marker({
         map: this.map, position: this.places[i].geometry.location,
-        icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
+        icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons' +
+          '/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
       });
     }
   }

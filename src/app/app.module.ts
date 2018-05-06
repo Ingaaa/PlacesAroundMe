@@ -5,11 +5,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { } from '@types/googlemaps';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from './../environments/environment';
 import { AppService } from './app.service';
+import { UserService } from './services/user.service';
 import { Common } from './common';
 
 import { AppComponent } from './app.component';
@@ -56,12 +57,13 @@ const appRoutes: Routes = [
       appRoutes
     ),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule
 
   ],
   providers: [
     AppService,
+    UserService,
     Common
   ],
   bootstrap: [AppComponent]

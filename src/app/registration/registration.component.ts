@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AppService } from '../app.service';
+import { UserService } from '../services/user.service';
 import { Common } from '../common';
 
 @Component({
@@ -11,50 +11,57 @@ import { Common } from '../common';
 export class RegistrationComponent implements OnInit {
 
   @ViewChild('registrationModal') registrationModal;
-  @Input('authState') authState;
   modalRef;
-  form = <any>{};
-  closeResult: string;
+  rForm = <any>{};
+  sForm = <any>{};
+  sError: string;
+  rError: string;
 
   ngOnInit() {
   }
 
   constructor(
     private modalService: NgbModal,
-    private service: AppService,
+    private service: UserService,
     private common: Common
   ) { }
 
   register() {
-    this.service.register(this.form.email, this.form.password).then((data) => {
-      console.log(data);
-      this.modalRef.close();
-      this.authState();
-    }, (error) => {
-      console.log(error);
-      const errorText = this.common.authErrors[error.code];
-    });
+    this.clearErrors();
+    if (this.rForm.password === this.rForm.password2) {
+      this.service.register(this.rForm.email, this.rForm.password).then((data) => {
+        this.modalRef.close();
+        this.service.createUserLists(data.uid);
+        console.log(data);
+      }, (error) => {
+        console.log(error);
+        this.rError = this.common.getErrorText(error.code);
+      });
+    } else {
+      this.rError = this.common.getErrorText('passwords_doesnt_match');
+    }
   }
 
   login() {
-    this.service.signIn(this.form.email, this.form.password).then((data) => {
-      console.log(data);
+    this.clearErrors();
+    this.service.signIn(this.sForm.email, this.sForm.password).then((data) => {
       this.modalRef.close();
-      this.authState();
     }, (error) => {
       console.log(error);
-      const errorText = this.common.authErrors[error.code];
+      this.sError = this.common.getErrorText(error.code);
     });
   }
 
   logOut() {
     this.service.signOut().then((data) => {
-      console.log(data);
-      this.authState();
     }, (error) => {
       console.log(error);
-      const errorText = this.common.authErrors[error.code];
     });
+  }
+
+  clearErrors() {
+    this.rError = '';
+    this.sError = '';
   }
 
   open() {

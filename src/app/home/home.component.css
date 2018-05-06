@@ -1,0 +1,33 @@
+.home-picture {
+    background-image: url("../../assets/img/home6.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+    display: flex;
+}
+
+.input-group.home-input {
+    min-width: 200px;
+}
+.input-group.home-input input, .input-group.home-input i {
+    line-height: 3rem;
+    border: 2px solid white;
+    color: white;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.input-group.home-input input {
+    border-left: none;
+}
+
+.input-group.home-input input:focus {
+    border-left: none;
+    box-shadow: none;
+}
+
+.input-group.home-input i {
+    border-right: none;
+}

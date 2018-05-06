@@ -1,32 +1,25 @@
-<ngb-carousel class="carousel slide">
-  <ng-template ngbSlide>
-    <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
-    <div class="carousel-caption pb-5">
-      <h3>Meklēt vietas</h3>
-      <p>Viegli atrodi vietu, ko meklē, pēc dažādiem kritērijiem!</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
-    <div class="carousel-caption pb-5">
-      <h3>Manas vietas</h3>
-      <p>Pievieno vietas, kuras esi apmeklējis, vēlies apmeklēt vai esi ļoti iecienījis!</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <img src="../../assets/img/home6.jpg" alt="Random first slide" class="img-fluid">
-    <div class="carousel-caption pb-5">
-      <h3>Vietas man apkārt</h3>
-      <p>Iepazīsti jaunas vietas, kuras atrodas te pat - tev apkārt!</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
+<div class="container-fluid navbar-margin">
+  <div class="row">
 
-<div class="row">
-  <div class="col-md-4 text-center p-3 place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
-    <h3 class="display-5">{{place.name}}</h3>
-    <p class="lead">{{place.vicinity}}</p>
-    <img *ngIf="place.photos" class="rounded-circle" height="140" width="140" src={{getPhoto(place)}} />
-    <i *ngIf="!place.photos" class="fas fa-globe"></i>
+    <div class="home-picture col-md-12 pb-5">
+      <div class="col-md-6 text-center m-auto align-middle">
+        <form>
+          <div class="input-group home-input">
+            <div class="input-group-prepend">
+              <i class="fas fa-search input-group-text"></i>
+            </div>
+            <input class="form-control form-control-lg" type="text" placeholder="Meklē pēc nosaukuma, kategorijas, adreses">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-4 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
+      <h4 class="display-5">{{place.name}}</h4>
+      <p class="lead">{{place.vicinity}}</p>
+      <img *ngIf="place.photos" src={{getPhoto(place)}} class="img-rounded" />
+      <i *ngIf="!place.photos" class="fas fa-globe"></i>
+    </div>
+
   </div>
 </div>

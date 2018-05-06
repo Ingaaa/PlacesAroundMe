@@ -1,27 +1,64 @@
 <div class="container navbar-margin">
   <div class="row" *ngIf="loaded">
-    <h1 class="col-md-12">{{place.name}}</h1>
-    <div class="col-md-6">{{place.formatted_address}}</div>
-    <div class="col-md-6">{{place.international_phone_number}}</div>
-    <div class="col-md-6" *ngIf="place.opening_hours != null && place.opening_hours.open_now">Atvērts</div>
-    <div class="col-md-6" *ngIf="place.opening_hours != null && !place.opening_hours.open_now">Aizvērts</div>
-    <div class="col-md-6">
-      <span *ngFor="let rating of ratings">
-      <!--<span class="fa fa-star checked" [ngClass]="{'fa-star checked': place.rating>rating, 'fa-star': place.rating<rating, 'fa-star-half-o checked': place.rating>rating && place.rating<rating-1, }"></span>-->
-      <span class="fa fa-star checked" *ngIf="place.rating>rating"></span>
-      <span class="fa fa-star" *ngIf="place.rating<rating"></span>
-      <span class="fa-star-half-o checked" *ngIf="place.rating<rating && place.rating>rating-1"></span>
-      </span>
-      <!--<span class="fa fa-star checked" [ngClass]="{'display': !loaded, 'hide': loaded}"></span>
 
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star-half-o checked"></span>
-      <span class="fa fa-star-o "></span>-->
+    <div class="col-md-12">
+      <h1 class="col-md-6">{{place.name}}</h1>
+      <button *ngFor="let list of lists" class="btn btn-primary" (click)="addToList(list.key)">
+        <i *ngIf="list.key === 'favourites'" class="icon-medium fas fa-star"></i>
+        <i *ngIf="list.key === 'toVisit'" class="icon-medium fas fa-map-marker"></i>
+        <i *ngIf="list.key === 'visited'" class="icon-medium fas fa-camera-retro"></i>
+      </button>
+    </div>
+
+    <hr>
+    <div class="col-md-12">
+      <i class="fas fa-map-marker"></i>
+      {{place.formatted_address}}
+    </div>
+    <div class="col-md-12">
+      <i class="fas fa-phone"></i>
+      {{place.international_phone_number}}
+    </div>
+    <div class="col-md-12">
+      <i class="fas fa-link"></i>
+      <a [href]="place.website" target="_blank ">{{place.website}}</a>
+    </div>
+    <div class="col-md-12" *ngIf="place.opening_hours !=null && place.opening_hours.open_now">
+      <i class="fas fa-clock"></i>
+      Atvērts
+    </div>
+    <div class="col-md-12" *ngIf="place.opening_hours !=null && !place.opening_hours.open_now">
+      <i class="fas fa-clock"></i>Aizvērts
+    </div>
+
+    <div class="col-md-12">
+      <span *ngFor="let rating of ratings">
+        <i class="fas fa-star checked" *ngIf="rating==='checked'"></i>
+        <i class="fas fa-star" *ngIf="rating==='empty'"></i>
+        <i class="fas fa-star-half checked" *ngIf="rating==='half-checked'"></i>
+        <i class="fas fa-star-half fa-flip-horizontal half-empty" *ngIf="rating==='half-empty'"></i>
+      </span>
+    </div>
+    <div class="col-md-12">
+      <h2>Atsauksmes</h2>
+      <div class="col-md-12 card" *ngFor="let review of place.reviews">
+        <div class="card-body">
+          <div class="col-md-12">
+            <img class="float-left" [src]="review.profile_photo_url" height="50px" width="50px" alt="Random first slide ">
+            <h5 class="card-title float-left">{{review.author_name}}</h5>
+          </div>
+          <div class="col-md-12" style="clear:both;">
+            {{review.relative_time_description}}
+          </div>
+          <div class="col-md-12 card-text" style="clear:both;">{{review.text}}</div>
+        </div>
+      </div>
+
     </div>
     <div class="col-md-12">
       <ngb-carousel *ngIf="place.photos" style="text-align:center; background-color:lightgray">
         <ng-template ngbSlide *ngFor="let photo of place.photos" style="text-align:center; background-color:lightgray">
-          <img [src]="photo.getUrl({ maxHeight: 400 })" alt="Random first slide">
+          <img [src]="photo.getUrl({ maxHeight: 400 })" alt="Random first slide ">
         </ng-template>
       </ngb-carousel>
     </div>

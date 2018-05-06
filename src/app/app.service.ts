@@ -3,14 +3,21 @@ import { Common } from './common';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { AngularFirestore } from 'angularfire2/firestore';
+
 
 @Injectable()
 export class AppService {
     geo: google.maps.Geocoder = new google.maps.Geocoder();
+    items: Observable<any[]>;
 
     constructor(
         private common: Common,
-        public angularFire: AngularFireAuth) { }
+        public angularFire: AngularFireAuth
+        // db: AngularFirestore
+    ) {
+        //  this.items = db.collection('items').valueChanges();
+    }
 
     getLocation(reload: boolean): Observable<any> {
 
@@ -85,25 +92,5 @@ export class AppService {
                 observer.complete();
             });
         });
-    }
-
-    register(email: string, password: string) {
-        return this.angularFire.auth.createUserWithEmailAndPassword(email, password);
-    }
-
-    signIn(email: string, password: string) {
-        return this.angularFire.auth.signInWithEmailAndPassword(email, password);
-    }
-
-    resetPassword(email: string) {
-        return this.angularFire.auth.sendPasswordResetEmail(email);
-    }
-
-    signOut() {
-        return this.angularFire.auth.signOut();
-    }
-
-    authState(): Observable<firebase.User> {
-        return this.angularFire.authState;
     }
 }

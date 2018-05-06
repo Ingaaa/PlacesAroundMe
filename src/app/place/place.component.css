@@ -1,12 +1,21 @@
 #placeMap {
     height: 500px;
-      }
-      .checked {
-    color: orange;
 }
 
 .carousel-item {
     background-color: lightgray !important;
     text-align: center !important;
 }
-      
+
+i.fas {
+    color: var(--purple);
+}
+
+i.fas.checked {
+    color: var(--yellow);
+}
+
+i.fas.half-empty {
+    position: relative;
+    left: -23px;
+}

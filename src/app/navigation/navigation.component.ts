@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from '../registration/registration.component';
-import { AppService } from '../app.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
   isCollapsed: boolean = true;
   user;
 
-  constructor(private service: AppService) { }
+  constructor(private service: UserService) { }
 
   ngOnInit() {
     this.authState();
@@ -28,7 +28,11 @@ export class NavigationComponent implements OnInit {
           this.logedIn = true;
           this.user = (user);
           console.log(user);
+        } else {
+          this.logedIn = false;
         }
+      }, error: (data) => {
+        console.log(data);
       }
     });
   }

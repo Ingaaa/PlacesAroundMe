@@ -1,11 +1,18 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "assets/web-fonts-with-css/css/fontawesome-all.min.css";
+:root {
+    --pink: #BC519E;
+    --purple: #49205E;
+    --yellow: #D9E254;
+    --light-purple: #805BA5;
+}
+
 a, a:visited {
-    color: rgb(73, 32, 94);
+    color: var(--purple);
 }
 
 a:hover, a:active {
-    color: #BC519E;
+    color: var(--pink);
 }
 
 button:focus {
@@ -14,11 +21,11 @@ button:focus {
 
 .btn.btn-primary:focus, .btn.btn-primary.focus, .btn.btn-primary:active, {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-    color: #BC519E;
+    color: var(--pink);
 }
 
 .btn.btn-primary {
-    background-color: #49205E;
+    background-color: var(--purple);
     border: none;
     transition: box-shadow .3s;
 }
@@ -28,45 +35,44 @@ button:focus {
 }
 
 .btn.btn-outline-dark {
-    color: #49205E;
-    border-color: #49205E;
+    color: var(--purple);
+    border-color: var(--purple);
 }
 
 .btn.btn-outline-dark:hover, .btn.btn-outline-dark:active {
     color: #fff;
-    border-color: #49205E;
-    background-color: #49205E;
+    border-color: var(--purple);
+    background-color: var(--purple);
 }
 
 .place-card:nth-of-type(4n+1) {
-    background-color: #49205E;
-    color: #fff;
+    background-color: var(--purple);
 }
 
 .place-card:nth-of-type(4n+2) {
-    background-color: #BC519E;
-    color: #fff;
+    background-color: var(--pink);
 }
 
 .place-card:nth-of-type(4n+3) {
-    background-color: #805BA5;
-    color: #fff;
+    background-color: var(--yellow);
+    color: var(--purple);
 }
 
 .place-card:nth-of-type(4n+4) {
-    background-color: #D9E254;
-    color: #49205E;
+    background-color: var(--light-purple);
 }
 
 .place-card .fas.fa-globe {
-    font-size: 140px;
+    font-size: 100px;
 }
 
 .place-card {
+    color: #fff;
     transition: box-shadow .3s;
     -webkit-animation: appear .6s linear 1;
     /* Safari */
     animation: appear .6s linear 1;
+    border: 5px solid white;
 }
 
 .place-card:hover {
@@ -96,10 +102,14 @@ button:focus {
     }
 }
 
-.rounded-photo {
-    height: 140px;
-    width: 140px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center center;
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+
+.navbar-margin {
+    margin-top: 56px;
 }

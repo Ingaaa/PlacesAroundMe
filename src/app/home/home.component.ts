@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   getPhoto(place) {
     if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxWidth: 140 });
+      return place.photos[0].getUrl({ maxWidth: 200, maxHeight: 150 });
     }
   }
 

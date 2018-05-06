@@ -1,11 +1,14 @@
 .navbar {
-    background-color: rgba(73, 32, 94, 0.8);
+    background-color: var(--purple);
     padding: 0px;
 }
 
 .navbar a, .navbar .navbar-toggler {
     transition: ease-in-out background-color .15s, ease-in-out color .15s;
     color: #fff;
+}
+.navbar .navbar-toggler {
+    border: none;
 }
 
 .fas.fa-globe {
@@ -17,12 +20,12 @@
 }
 
 .navbar a.nav-link.nav-login {
-    background-color: #BC519E;
+    background-color: var(--pink);
 }
 
 .navbar a.nav-link:hover, .navbar a.nav-link:active, .navbar a.nav-link.active {
-    background-color: #D9E254;
-    color: rgb(73, 32, 94);
+    background-color: var(--yellow);
+    color:  var(--purple);
 }
 
 nav .navbar-nav .nav-link, nav .navbar-brand, nav .navbar-toggler {
@@ -31,5 +34,5 @@ nav .navbar-nav .nav-link, nav .navbar-brand, nav .navbar-toggler {
 }
 
 .navbar .navbar-toggler[aria-expanded="true"] {
-    color: #D9E254;
+    color: var(--yellow);
 }

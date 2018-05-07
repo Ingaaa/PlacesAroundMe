@@ -16,18 +16,21 @@ a:hover, a:active {
 }
 
 button:focus {
-    outline: none;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.btn.btn-primary:focus, .btn.btn-primary.focus, .btn.btn-primary:active, {
+button, .home-input {
+    transition: box-shadow .3s;
+}
+
+.btn.btn-primary:focus, .btn.btn-primary.focus {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-    color: var(--pink);
 }
 
-.btn.btn-primary {
+.btn.btn-primary, .btn.btn-primary:active {
     background-color: var(--purple);
     border: none;
-    transition: box-shadow .3s;
 }
 
 .btn.btn-primary:hover {

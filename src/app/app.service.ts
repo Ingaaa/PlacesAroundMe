@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Common } from './common';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { AngularFirestore } from 'angularfire2/firestore';
-
 
 @Injectable()
 export class AppService {
@@ -14,10 +11,7 @@ export class AppService {
     constructor(
         private common: Common,
         public angularFire: AngularFireAuth
-        // db: AngularFirestore
-    ) {
-        //  this.items = db.collection('items').valueChanges();
-    }
+    ) { }
 
     getLocation(reload: boolean): Observable<any> {
 
@@ -27,10 +21,8 @@ export class AppService {
                 observer.complete();
             } else {
                 if (navigator.geolocation) {
-                    console.log('Geolocation is supported!');
                     navigator.geolocation.getCurrentPosition((position) => {
                         this.common.setLocation(position);
-                        console.log(position);
                         observer.next();
                         observer.complete();
                     }, () => {
@@ -39,7 +31,6 @@ export class AppService {
                         observer.complete();
                     });
                 } else {
-                    console.log('Geolocation is not supported for this Browser/OS.');
                     this.common.setDefaultLocation();
                     observer.next();
                     observer.complete();

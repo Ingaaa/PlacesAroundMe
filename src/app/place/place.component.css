@@ -19,3 +19,15 @@ i.fas.half-empty {
     position: relative;
     left: -23px;
 }
+
+i.fas.wh {
+    color: white;
+}
+
+hr {
+    border-top: 3px solid var(--purple);
+}
+
+.added {
+    background-color: var(--light-purple);
+}

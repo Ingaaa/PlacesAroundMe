@@ -16,10 +16,10 @@
         </div>
         <div class="form-group col-md-6">
           <label for="type">Kategorija</label>
-          <select class="form-control" name="type" id="type" [(ngModel)]="search.type">
-            <option> </option>
-            <option *ngFor="let c of categories" [ngValue]="c">{{c.title}}</option>
-          </select>
+          <input type="text" name="type" class="form-control" id="type" [(ngModel)]="search.type" list="categories">
+          <datalist id="categories">
+            <option *ngFor="let c of categories">{{c.title}}</option>
+          </datalist>
         </div>
         <div class="form-group col-md-3">
           <label for="minPriceLevel">Cenas no</label>

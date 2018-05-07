@@ -53,12 +53,16 @@ export class PlacesComponent implements OnInit {
   searchPlaces() {
     const body = this.copyObject(this.search);
     if (this.googleAutocompleteService.getPlace() != null) {
-      console.log(this.googleAutocompleteService.getPlace());
       body.location = this.googleAutocompleteService.getPlace().geometry.location;
     } else {
       body.location = this.common.location;
     }
-    body.radius = 500;
+    if (body.radius == null) {
+      body.radius = 1000;
+    }
+    if (body.type) {
+      body.type = this.findTypeValue(body.type);
+    }
     this.service.searchPlaces(this.googleMapsService, body).subscribe({
       next: this.setPlaces,
       error: () => { },
@@ -93,5 +97,16 @@ export class PlacesComponent implements OnInit {
     if ((place.photos != null) && place.photos.length > 0) {
       return place.photos[0].getUrl({ maxWidth: 140 });
     }
+  }
+
+  findTypeValue(title: string): string {
+    let value = '';
+    for (let i = 0; i < this.categories.length; i++) {
+      if (this.categories[i].title === title) {
+        value = this.categories[i].value;
+        break;
+      }
+    }
+    return value;
   }
 }

@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'vietas', component: PlacesComponent },
   { path: 'vieta/:id', component: PlaceComponent },
   { path: 'saraksti', component: ListsComponent },
-  { path: 'saraksts/:nosaukums', component: ListComponent },
+  { path: 'saraksts/:id', component: ListComponent },
   {
     path: '',
     redirectTo: 'sakums',

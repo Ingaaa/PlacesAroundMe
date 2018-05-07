@@ -35,8 +35,8 @@ export class HomeComponent implements OnInit {
 
   searchPlaces = () => {
     this.service.searchPlaces(this.placesService, {
-      location: this.common.location,
-      radius: 500,
+      location: this.common.defaultLocation,
+      radius: 1000,
       type: 'point_of_interest'
     }).subscribe({
       next: (data) => {

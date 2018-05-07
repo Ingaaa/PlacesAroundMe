@@ -37,13 +37,11 @@ export class PlaceComponent implements OnInit {
       next: (user) => {
         if (user != null && user.uid != null) {
           this.userUID = user.uid;
-          this.getUserLists(user.uid);
-          console.log(user);
+          this.getUserLists();
         } else {
           this.lists = [];
         }
       }, error: (data) => {
-        console.log(data);
         this.lists = [];
       }
     });
@@ -66,7 +64,6 @@ export class PlaceComponent implements OnInit {
   }
 
   setPlace = (data) => {
-    console.log(data);
 
     this.place = data;
     for (let i: number = 1; i < 6; i++) {
@@ -78,7 +75,6 @@ export class PlaceComponent implements OnInit {
         this.ratings.push('half-checked');
         this.ratings.push('half-empty');
       }
-      console.log(this.ratings);
     }
     const marker = new google.maps.Marker({
       map: this.map, position: this.place.geometry.location,
@@ -87,16 +83,34 @@ export class PlaceComponent implements OnInit {
     this.loaded = true;
   }
 
-  getUserLists(userUID) {
-    this.userService.getUserLists(userUID).subscribe({
+  getUserLists() {
+    this.userService.getUserLists(this.userUID).subscribe({
       next: (data) => {
-        console.log(data);
-        this.lists = data['lists'];
+        this.lists = data;
+        this.lists.forEach(element => {
+          this.findPlaceInList(element);
+        });
       }
     });
   }
 
-  addToList(listKey) {
-    this.userService.updateUserList(this.id, this.userUID);
+  findPlaceInList(list) {
+    this.userService.findPlaceInList(this.id, this.userUID, list.id).subscribe({
+      next: (data) => {
+        if (data && data.length && data.length > 0) {
+          list.added = true;
+        } else {
+          list.added = false;
+        }
+      }
+    });
+  }
+
+  addToList(list) {
+    if (list.added) {
+      this.userService.removeFromUserList(this.id, this.userUID, list.id);
+    } else {
+      this.userService.addToUserList(this.id, this.userUID, list.id);
+    }
   }
 }

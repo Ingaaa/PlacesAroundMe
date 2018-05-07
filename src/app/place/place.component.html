@@ -3,35 +3,34 @@
 
     <div class="col-md-12">
       <h1 class="col-md-6">{{place.name}}</h1>
-      <button *ngFor="let list of lists" class="btn btn-primary" (click)="addToList(list.key)">
-        <i *ngIf="list.key === 'favourites'" class="icon-medium fas fa-star"></i>
-        <i *ngIf="list.key === 'toVisit'" class="icon-medium fas fa-map-marker"></i>
-        <i *ngIf="list.key === 'visited'" class="icon-medium fas fa-camera-retro"></i>
+      <button *ngFor="let list of lists" [class.added]="list.added" class="btn btn-primary" (click)="addToList(list)">
+        <i *ngIf="list.key === 'favourites'" class="fas fa-star wh"></i>
+        <i *ngIf="list.key === 'toVisit'" class="fas fa-map-marker wh"></i>
+        <i *ngIf="list.key === 'visited'" class="fas fa-camera-retro wh"></i>
       </button>
     </div>
 
-    <hr>
-    <div class="col-md-12">
+    <div *ngIf="place.formatted_address" class="col-md-12">
       <i class="fas fa-map-marker"></i>
       {{place.formatted_address}}
     </div>
-    <div class="col-md-12">
+    <div *ngIf="place.international_phone_number" class="col-md-12">
       <i class="fas fa-phone"></i>
       {{place.international_phone_number}}
     </div>
-    <div class="col-md-12">
+    <div *ngIf="place.website" class="col-md-12">
       <i class="fas fa-link"></i>
       <a [href]="place.website" target="_blank ">{{place.website}}</a>
     </div>
-    <div class="col-md-12" *ngIf="place.opening_hours !=null && place.opening_hours.open_now">
+    <div class="col-md-12" *ngIf="place.opening_hours && place.opening_hours.open_now">
       <i class="fas fa-clock"></i>
       Atvērts
     </div>
-    <div class="col-md-12" *ngIf="place.opening_hours !=null && !place.opening_hours.open_now">
+    <div class="col-md-12" *ngIf="place.opening_hours && !place.opening_hours.open_now">
       <i class="fas fa-clock"></i>Aizvērts
     </div>
 
-    <div class="col-md-12">
+    <div *ngIf="place.rating" class="col-md-12">
       <span *ngFor="let rating of ratings">
         <i class="fas fa-star checked" *ngIf="rating==='checked'"></i>
         <i class="fas fa-star" *ngIf="rating==='empty'"></i>
@@ -39,7 +38,7 @@
         <i class="fas fa-star-half fa-flip-horizontal half-empty" *ngIf="rating==='half-empty'"></i>
       </span>
     </div>
-    <div class="col-md-12">
+    <div *ngIf="place.reviews && place.reviews.length>0" class="col-md-12">
       <h2>Atsauksmes</h2>
       <div class="col-md-12 card" *ngFor="let review of place.reviews">
         <div class="card-body">
@@ -55,8 +54,8 @@
       </div>
 
     </div>
-    <div class="col-md-12">
-      <ngb-carousel *ngIf="place.photos" style="text-align:center; background-color:lightgray">
+    <div *ngIf="place.photos && place.photos.length>0" class="col-md-12">
+      <ngb-carousel style="text-align:center; background-color:lightgray">
         <ng-template ngbSlide *ngFor="let photo of place.photos" style="text-align:center; background-color:lightgray">
           <img [src]="photo.getUrl({ maxHeight: 400 })" alt="Random first slide ">
         </ng-template>

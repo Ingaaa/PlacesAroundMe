@@ -32,9 +32,7 @@ export class RegistrationComponent implements OnInit {
       this.service.register(this.rForm.email, this.rForm.password).then((data) => {
         this.modalRef.close();
         this.service.createUserLists(data.uid);
-        console.log(data);
       }, (error) => {
-        console.log(error);
         this.rError = this.common.getErrorText(error.code);
       });
     } else {
@@ -47,16 +45,13 @@ export class RegistrationComponent implements OnInit {
     this.service.signIn(this.sForm.email, this.sForm.password).then((data) => {
       this.modalRef.close();
     }, (error) => {
-      console.log(error);
       this.sError = this.common.getErrorText(error.code);
     });
   }
 
   logOut() {
     this.service.signOut().then((data) => {
-    }, (error) => {
-      console.log(error);
-    });
+    }, (error) => { });
   }
 
   clearErrors() {

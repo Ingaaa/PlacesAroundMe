@@ -5,6 +5,8 @@ import { } from '@types/googlemaps';
 export class Common {
     readonly defaultLatitude: number = 56.9582922;
     readonly defaultLongitude: number = 24.100993;
+    readonly defaultLocation: google.maps.LatLng =
+        new google.maps.LatLng(this.defaultLatitude, this.defaultLongitude);
     latitude: number;
     longitude: number;
     location: google.maps.LatLng;
@@ -16,63 +18,29 @@ export class Common {
     ];
 
     readonly categories = [
-        {
-            value: 'money', title: 'Nauda',
-            types: ['insurance_agency', 'atm', 'bank']
-        },
-        {
-            value: 'transportation', title: 'Transports',
-            types: ['bus_station', 'car_dealer', 'car_rental', 'car_repair', 'car_wash', 'subway_station',
-                'gas_station', 'parking', 'taxi_stand', 'train_station', 'transit_station', 'airport', 'bicycle_store']
-        },
-        {
-            value: 'fun', title: 'Izklaide',
-            types: ['bowling_alley', 'movie_theater', 'museum', 'park', 'amusement_park', 'aquarium', 'art_gallery',
-                'stadium', 'zoo']
-        },
-        {
-            value: 'sport', title: 'Sports',
-            types: ['stadium', 'gym']
-        },
-        {
-            value: 'nightlife', title: 'Nakts izklaide',
-            types: ['casino', 'night_club', 'bar', 'liquor_store']
-        },
-        {
-            value: 'beauty', title: 'Skaistums',
-            types: ['hair_care', 'spa', 'beauty_salon']
-        },
-        {
-            value: 'food', title: 'Ēdiens',
-            types: ['cafe', 'restaurant', 'meal_delivery', 'meal_takeaway', 'bakery']
-        },
-        {
-            value: 'shopping', title: 'Iepirkšanās',
-            types: ['store', 'convenience_store', 'department_store', 'electronics_store',
-                'furniture_store', 'shoe_store', 'shopping_mall', 'home_goods_store', 'jewelry_store', 'pet_store',
-                'liquor_store', 'bicycle_store', 'book_store', 'supermarket', 'hardware_store', 'movie_rental']
-        },
-        {
-            value: 'education', title: 'Izglītība',
-            types: ['library', 'school', 'book_store']
-        },
-        {
-            value: 'animals', title: 'Dzīvnieki',
-            types: ['pet_store', 'veterinary_care', 'zoo']
-        },
-        {
-            value: 'accommodation', title: 'Mājvieta',
-            types: ['campground', 'lodging']
-        },
-        {
-            value: 'health', title: 'Veselība',
-            types: ['dentist', 'doctor', 'hospital', 'pharmacy', 'physiotherapist']
-        },
-        {
-            value: 'house', title: 'Māja',
-            types: ['electronics_store', 'furniture_store', 'home_goods_store', 'hardware_store', 'plumber',
-                'moving_company', 'electrician']
-        }
+        { value: 'accounting', title: 'Grāmatvedība' },
+        { value: 'airport', title: 'Lidosta' },
+        { value: 'amusement_park', title: 'Atrakciju parks' },
+        { value: 'aquarium', title: 'Akvārijs' },
+        { value: 'art_gallery', title: 'Mākslas galerija' },
+        { value: 'atm', title: 'Bankomāts' },
+        { value: 'bakery', title: 'Maiznīca' },
+        { value: 'bank', title: 'Banka' },
+        { value: 'bar', title: 'Bārs' },
+        { value: 'beauty_salon', title: 'Skaistumkopšanas salons' },
+        { value: 'bicycle_store', title: 'Riteņbraukšanas veikals' },
+        { value: 'book_store', title: 'Grāmatu veikals' },
+        { value: 'bowling_alley', title: 'Boulings' },
+        { value: 'bus_station', title: 'Autobusa pietura' },
+        { value: 'cafe', title: 'Kafejnīca' },
+        { value: 'campground', title: 'Kempings' },
+        { value: 'car_dealer', title: 'Automašīnu tirgotājs' },
+        { value: 'car_rental', title: 'Autonoma' },
+        { value: 'car_repair', title: 'Automašīnu remonts' },
+        { value: 'car_wash', title: 'Automazgātuve' },
+        { value: 'casino', title: 'Kazino' },
+        { value: 'cemetery', title: 'Kapsēta' },
+        { value: 'church', title: 'Baznīca' }
     ];
 
     readonly authErrors = {
@@ -100,38 +68,7 @@ export class Common {
     }
 
     setDefaultLocation() {
-        this.location = new google.maps.LatLng(this.defaultLatitude, this.defaultLongitude);
+        this.location = this.defaultLocation;
     }
 }
-
-
-
-
-
-/*
-cemetery
-church
-city_hall
-courthouse
-embassy
-fire_station
-florist
-funeral_home
-hindu_temple
-*insurance_agency
-laundry
-lawyer
-local_government_office
-locksmith
-mosque
-painter
-police
-post_office
-real_estate_agency
-roofing_contractor
-rv_park
-storage
-synagogue
-travel_agency
-*/
 

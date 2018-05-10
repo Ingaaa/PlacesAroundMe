@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 export class ListsComponent implements OnInit {
 
   private userUID: string;
-  private lists;
+  lists;
 
   constructor(
     private service: UserService

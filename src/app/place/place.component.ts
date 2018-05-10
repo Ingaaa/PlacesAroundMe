@@ -15,7 +15,7 @@ export class PlaceComponent implements OnInit {
   private map: google.maps.Map;
   private id: string;
   private ratings: string[] = [];
-  private loaded: boolean = false;
+  loaded: boolean = false;
   private userUID: string;
   private lists;
 

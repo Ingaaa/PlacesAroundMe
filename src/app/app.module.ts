@@ -7,6 +7,7 @@ import { } from '@types/googlemaps';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from './../environments/environment';
 import { AppService } from './app.service';
@@ -24,16 +25,12 @@ import { ListComponent } from './list/list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'sakums', component: HomeComponent },
   { path: 'vietas', component: PlacesComponent },
   { path: 'vieta/:id', component: PlaceComponent },
   { path: 'saraksti', component: ListsComponent },
   { path: 'saraksts/:id', component: ListComponent },
-  {
-    path: '',
-    redirectTo: 'sakums',
-    pathMatch: 'full'
-  },
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -58,8 +55,8 @@ const appRoutes: Routes = [
     ),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
-
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AppService,

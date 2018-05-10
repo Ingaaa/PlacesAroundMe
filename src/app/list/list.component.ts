@@ -12,7 +12,7 @@ export class ListComponent implements OnInit {
 
   private placesService: google.maps.places.PlacesService;
   private userUID: string;
-  private places = [];
+  places = [];
   private id: string;
 
   constructor(

@@ -20,11 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.placesService = new google.maps.places.PlacesService(document.createElement('div'));
-    this.service.getLocation(false).subscribe({
-      next: this.searchPlaces,
-      error: () => { },
-      complete: () => { }
-    });
+    this.searchPlaces();
   }
 
   getPhoto(place) {
@@ -35,8 +31,8 @@ export class HomeComponent implements OnInit {
 
   searchPlaces = () => {
     this.service.searchPlaces(this.placesService, {
-      location: this.common.location,
-      radius: 500,
+      location: this.common.defaultLocation,
+      radius: 1000,
       type: 'point_of_interest'
     }).subscribe({
       next: (data) => {

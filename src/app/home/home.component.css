@@ -1,5 +1,5 @@
 .home-picture {
-    background-image: url("../../assets/img/home6.jpg");
+    background-image: url("../../assets/img/home.jpg");
     background-repeat: no-repeat;
     background-color: #cccccc;
     background-position: center;
@@ -11,6 +11,12 @@
 .input-group.home-input {
     min-width: 200px;
 }
+
+.input-group.home-input input::placeholder {
+    color: #fff;
+    opacity: 0.7;
+}
+
 .input-group.home-input input, .input-group.home-input i {
     line-height: 3rem;
     border: 2px solid white;
@@ -19,15 +25,19 @@
     background-color: transparent;
 }
 
-.input-group.home-input input {
-    border-left: none;
-}
-
 .input-group.home-input input:focus {
     border-left: none;
     box-shadow: none;
 }
 
 .input-group.home-input i {
-    border-right: none;
+    border-left: none;
+}
+
+.home-input:focus-within {
+    box-shadow: 0px 0px 5px #fff;
+}
+
+.home-input .input-group-append:hover {
+    cursor: pointer;
 }

@@ -1,0 +1,14 @@
+{
+    "short_name": "Vietas",
+    "name": "Vietas man apkārt",
+    "icons": [
+           {
+            "src": "assets/icons/android-icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+           }
+    ],
+    "start_url": "index.html",
+    "background_color": "#BC519E",
+    "display": "standalone"
+  }

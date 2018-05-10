@@ -27,13 +27,10 @@ export class NavigationComponent implements OnInit {
         if (user != null && user.uid != null) {
           this.logedIn = true;
           this.user = (user);
-          console.log(user);
         } else {
           this.logedIn = false;
         }
-      }, error: (data) => {
-        console.log(data);
-      }
+      }, error: (data) => { }
     });
   }
 

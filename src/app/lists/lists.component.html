@@ -1,5 +1,5 @@
 <div class="row navbar-margin lists">
-  <div class="col-md-4 text-center p-3 place-card" *ngFor="let list of lists" routerLink="/saraksts/{{list.key}}">
+  <div class="col-md-4 text-center p-3 place-card" *ngFor="let list of lists" routerLink="/saraksts/{{list.id}}">
     <h3 class="display-5">{{list.title}}</h3>
     <i *ngIf="list.key === 'favourites'" class="icon-medium fas fa-star"></i>
     <i *ngIf="list.key === 'toVisit'" class="icon-medium fas fa-map-marker"></i>

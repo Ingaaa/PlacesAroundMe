@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -11,10 +9,9 @@ import { UserService } from '../services/user.service';
 export class ListsComponent implements OnInit {
 
   private userUID: string;
-  private lists;
+  lists;
 
   constructor(
-    private afs: AngularFirestore,
     private service: UserService
   ) { }
 
@@ -24,12 +21,10 @@ export class ListsComponent implements OnInit {
         if (user != null && user.uid != null) {
           this.userUID = user.uid;
           this.getUserLists(user.uid);
-          console.log(user);
         } else {
           this.lists = [];
         }
       }, error: (data) => {
-        console.log(data);
         this.lists = [];
       }
     });
@@ -38,8 +33,8 @@ export class ListsComponent implements OnInit {
   getUserLists(userUID) {
     this.service.getUserLists(userUID).subscribe({
       next: (data) => {
-        this.lists = data['lists'];
         console.log(data);
+        this.lists = data;
       }
     });
   }

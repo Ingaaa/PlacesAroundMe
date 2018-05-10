@@ -8,6 +8,11 @@ import * as firebase from 'firebase/app';
 export class UserService {
     private listsCollection: AngularFirestoreCollection<any> =
         this.afs.collection<any>('Lists');
+    private readonly lists = [
+        { title: 'Favorīti', key: 'favourites' },
+        { title: 'Vēlos apmeklēt', key: 'toVisit' },
+        { title: 'Esmu apmeklējis', key: 'visited' }
+    ];
 
     constructor(
         private angularFire: AngularFireAuth,
@@ -35,49 +40,49 @@ export class UserService {
     }
 
     createUserLists(userUID) {
+        this.afs.collection('Lists').doc(userUID).set({ userUID: userUID });
 
-        const list1 = {
-            created: new Date().valueOf(),
-            title: 'Favorīti',
-            userUID: userUID,
-            placesIds: [],
-            key: 'favourites'
-        };
-
-        const list2 = {
-            created: new Date().valueOf(),
-            title: 'Vēlos apmeklēt',
-            userUID: userUID,
-            placesIds: [],
-            key: 'toVisit'
-        };
-
-        const list3 = {
-            created: new Date().valueOf(),
-            title: 'Esmu apmeklējis',
-            userUID: userUID,
-            placesIds: [],
-            key: 'visited'
-        };
-
-        this.listsCollection.doc(userUID).set(
-            {
-                userUID: userUID,
-                lists: [list1, list2, list3]
-            });
+        this.lists.forEach(element => {
+            const id = this.afs.createId();
+            this.afs.collection('Lists').doc(userUID).collection('lists')
+                .doc(id).set(
+                    {
+                        id: id,
+                        created: new Date().valueOf(),
+                        title: element.title,
+                        key: element.key,
+                    }, { merge: true });
+            this.afs.collection('Lists').doc(userUID).collection('lists')
+                .doc(id).collection('places');
+        });
     }
 
     getUserLists(userUID: string) {
-        return this.listsCollection.doc(userUID).valueChanges();
+        return this.listsCollection.doc(userUID).collection('lists').valueChanges();
     }
 
-    updateUserList(placeId, userUID) {
-        const userListCollection = this.afs.collection<any>('Lists/' + userUID + '/lists/0/placesIds');
-        userListCollection.add({ id: placeId, created: new Date().valueOf() }).then((data) => {
-            console.log(data);
-        });
+    addToUserList(placeID, userUID, listID) {
+        const userListCollection = this.afs.collection('Lists').doc(userUID)
+            .collection('lists').doc(listID).collection('places').doc(placeID);
 
-        // this.listsCollection.doc(userUID + '/lists/0/placesIds/1').set(data);
+        userListCollection.set({ id: placeID, created: new Date().valueOf() }).then((data) => { });
     }
 
+    removeFromUserList(placeID, userUID, listID) {
+        const userListCollection = this.afs.collection('Lists').doc(userUID)
+            .collection('lists').doc(listID).collection('places').doc(placeID);
+        userListCollection.delete();
+    }
+
+    findPlaceInList(placeID, userUID, listID) {
+        return this.afs.collection('Lists').doc(userUID)
+            .collection('lists').doc(listID)
+            .collection('places', ref => ref.where('id', '==', placeID)).valueChanges();
+    }
+
+    getListPlaces(userUID, listID) {
+        return this.afs.collection('Lists').doc(userUID)
+            .collection('lists').doc(listID)
+            .collection('places').valueChanges();
+    }
 }

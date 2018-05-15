@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Common } from './common';
+import { Common } from '../common';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class AppService {
     geo: google.maps.Geocoder = new google.maps.Geocoder();
-    items: Observable<any[]>;
 
     constructor(
-        private common: Common,
-        public angularFire: AngularFireAuth
+        private common: Common
     ) { }
 
     getLocation(reload: boolean): Observable<any> {
@@ -44,6 +41,22 @@ export class AppService {
 
         return new Observable((observer) => {
             googleMapsService.nearbySearch(body,
+                (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        observer.next(data);
+                    } else {
+                        observer.error(data);
+                    }
+                    observer.complete();
+                });
+        });
+    }
+
+    placesTextSearch(googleMapsService: google.maps.places.PlacesService,
+        body: google.maps.places.TextSearchRequest): Observable<any> {
+
+        return new Observable((observer) => {
+            googleMapsService.textSearch(body,
                 (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         observer.next(data);

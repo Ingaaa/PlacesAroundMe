@@ -24,10 +24,15 @@ i.fas.wh {
     color: white;
 }
 
-hr {
-    border-top: 3px solid var(--purple);
+button.btn.btn-primary.add {
+    margin-right: 7px;
 }
 
 .added {
     background-color: var(--light-purple);
+}
+
+.dividor {
+    border-bottom: 2px solid var(--yellow);
+    margin: 15px 0px;
 }

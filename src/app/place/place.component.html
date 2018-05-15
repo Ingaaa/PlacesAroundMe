@@ -1,9 +1,12 @@
-<div class="container navbar-margin">
+<main class="container navbar-margin">
   <div class="row" *ngIf="loaded">
 
+
+    <h2 class="col-md-12 pt-5">{{place.name}}</h2>
     <div class="col-md-12">
-      <h1 class="col-md-6">{{place.name}}</h1>
-      <button *ngFor="let list of lists" [class.added]="list.added" class="btn btn-primary" (click)="addToList(list)">
+      <div class="dividor col-md-12"></div>
+      <button *ngFor="let list of lists" [class.added]="list.added" class="btn btn-primary add" (click)="addToList(list)" placement="bottom"
+        ngbTooltip="{{list.title}}" [attr.aria-label]="list.title">
         <i *ngIf="list.key === 'favourites'" class="fas fa-star wh"></i>
         <i *ngIf="list.key === 'toVisit'" class="fas fa-map-marker wh"></i>
         <i *ngIf="list.key === 'visited'" class="fas fa-camera-retro wh"></i>
@@ -38,12 +41,14 @@
         <i class="fas fa-star-half fa-flip-horizontal half-empty" *ngIf="rating==='half-empty'"></i>
       </span>
     </div>
+
     <div *ngIf="place.reviews && place.reviews.length>0" class="col-md-12">
-      <h2>Atsauksmes</h2>
-      <div class="col-md-12 card" *ngFor="let review of place.reviews">
+      <div class="dividor col-md-12"></div>
+      <h3>Atsauksmes</h3>
+      <div class="card" *ngFor="let review of place.reviews">
         <div class="card-body">
           <div class="col-md-12">
-            <img class="float-left" [src]="review.profile_photo_url" height="50px" width="50px" alt="Random first slide ">
+            <img class="float-left" [src]="review.profile_photo_url" height="50px" width="50px" alt="{{review.author_name}}">
             <h5 class="card-title float-left">{{review.author_name}}</h5>
           </div>
           <div class="col-md-12" style="clear:both;">
@@ -55,13 +60,15 @@
 
     </div>
     <div *ngIf="place.photos && place.photos.length>0" class="col-md-12">
+      <div class="dividor col-md-12"></div>
       <ngb-carousel style="text-align:center; background-color:lightgray">
         <ng-template ngbSlide *ngFor="let photo of place.photos" style="text-align:center; background-color:lightgray">
-          <img [src]="photo.getUrl({ maxHeight: 400 })" alt="Random first slide ">
+          <img [src]="photo.getUrl({ maxHeight: 400 })" alt="{{place.name}}">
         </ng-template>
       </ngb-carousel>
     </div>
+    <div class="dividor col-md-12"></div>
   </div>
 
   <div id="placeMap"></div>
-</div>
+</main>

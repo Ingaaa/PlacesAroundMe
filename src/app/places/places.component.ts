@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Common } from '../common';
-import { AppService } from '../app.service';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-places',
@@ -20,13 +21,22 @@ export class PlacesComponent implements OnInit {
 
   constructor(
     private common: Common,
-    private service: AppService
+    private service: AppService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.googleAutocompleteService = new google.maps.places.Autocomplete(<HTMLInputElement>document.getElementById('location'));
+    this.search.query = this.route.snapshot.paramMap.get('query');
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: this.common.getLocation(),
+      zoom: 15
+    });
+    this.googleMapsService = new google.maps.places.PlacesService(this.map);
+  }
 
-    this.service.getLocation(false).subscribe({
+  getLocation() {
+    this.service.getLocation(true).subscribe({
       next: this.setLocation,
       error: () => { },
       complete: () => { }
@@ -34,12 +44,8 @@ export class PlacesComponent implements OnInit {
   }
 
   setLocation = () => {
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      center: this.common.location,
-      zoom: 15
-    });
+    this.map.setCenter(this.common.location);
     const marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: 'Esmu te!' });
-    this.googleMapsService = new google.maps.places.PlacesService(this.map);
 
     this.service.geoCode().subscribe({
       next: (data) => {
@@ -51,23 +57,25 @@ export class PlacesComponent implements OnInit {
   }
 
   searchPlaces() {
-    const body = this.copyObject(this.search);
-    if (this.googleAutocompleteService.getPlace() != null) {
-      body.location = this.googleAutocompleteService.getPlace().geometry.location;
-    } else {
-      body.location = this.common.location;
+    if (this.search.query != null && this.search.query !== '') {
+      const body = this.copyObject(this.search);
+      if (this.googleAutocompleteService.getPlace() != null) {
+        body.location = this.googleAutocompleteService.getPlace().geometry.location;
+      } else {
+        body.location = this.common.location;
+      }
+      if (body.radius == null) {
+        body.radius = 1000;
+      }
+      if (body.type) {
+        body.type = this.findTypeValue(body.type);
+      }
+      this.service.placesTextSearch(this.googleMapsService, body).subscribe({
+        next: this.setPlaces,
+        error: () => { },
+        complete: () => { }
+      });
     }
-    if (body.radius == null) {
-      body.radius = 1000;
-    }
-    if (body.type) {
-      body.type = this.findTypeValue(body.type);
-    }
-    this.service.searchPlaces(this.googleMapsService, body).subscribe({
-      next: this.setPlaces,
-      error: () => { },
-      complete: () => { }
-    });
   }
 
   setPlaces = (data) => {
@@ -95,7 +103,7 @@ export class PlacesComponent implements OnInit {
 
   getPhoto(place) {
     if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxWidth: 140 });
+      return place.photos[0].getUrl({ maxWidth: 140, maxHeight: 140 });
     }
   }
 

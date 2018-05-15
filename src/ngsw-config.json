@@ -8,8 +8,7 @@
             "resources": {
                 "files": [
                     "/favicon.ico",
-                    "/index.html",
-                    "/manifest.json"
+                    "/index.html"
                 ],
                 "versionedFiles": [
                     "/*.bundle.css",

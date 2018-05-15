@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { } from '@types/googlemaps';
 
 @Injectable()
 export class Common {
@@ -69,6 +68,13 @@ export class Common {
 
     setDefaultLocation() {
         this.location = this.defaultLocation;
+    }
+
+    getLocation() {
+        if (!this.location) {
+            this.setDefaultLocation();
+        }
+        return this.location;
     }
 }
 

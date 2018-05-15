@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from '../registration/registration.component';
 import { UserService } from '../services/user.service';
 

@@ -3,9 +3,10 @@
 
     <div class="home-picture col-md-12 pb-5">
       <div class="col-md-6 text-center m-auto align-middle">
-        <form>
+        <form name="homeForm">
           <div class="input-group home-input">
-            <input class="form-control form-control-lg" type="text" placeholder="Meklē pēc atslēgvārda">
+            <input name="query" class="form-control form-control-lg" type="text" placeholder="Kafejnīcas Rīgā" [(ngModel)]="search.query"
+              (keyup.enter)="searchPlaces()" aria-label="Meklēšanas lauks">
             <div class="input-group-append" (click)="searchPlaces()">
               <i class="fas fa-search input-group-text"></i>
             </div>
@@ -17,9 +18,8 @@
     <div class="col-md-4 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
       <h4 class="display-5">{{place.name}}</h4>
       <p class="lead">{{place.vicinity}}</p>
-      <img *ngIf="place.photos" src={{getPhoto(place)}} class="img-rounded" />
+      <img *ngIf="place.photos" src="{{getPhoto(place)}}" class="rounded-circle" alt="{{place.name}}" />
       <i *ngIf="!place.photos" class="fas fa-globe"></i>
     </div>
-
   </div>
 </div>

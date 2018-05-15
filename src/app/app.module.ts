@@ -10,7 +10,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from './../environments/environment';
-import { AppService } from './app.service';
+import { AppService } from './services/app.service';
 import { UserService } from './services/user.service';
 import { Common } from './common';
 

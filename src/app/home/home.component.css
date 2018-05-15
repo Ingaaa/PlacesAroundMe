@@ -26,7 +26,6 @@
 }
 
 .input-group.home-input input:focus {
-    border-left: none;
     box-shadow: none;
 }
 
@@ -34,7 +33,7 @@
     border-left: none;
 }
 
-.home-input:focus-within {
+.home-input:hover {
     box-shadow: 0px 0px 5px #fff;
 }
 

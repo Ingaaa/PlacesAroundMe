@@ -33,7 +33,6 @@ export class ListsComponent implements OnInit {
   getUserLists(userUID) {
     this.service.getUserLists(userUID).subscribe({
       next: (data) => {
-        console.log(data);
         this.lists = data;
       }
     });

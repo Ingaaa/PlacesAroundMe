@@ -1,56 +1,72 @@
-<div class="navbar-margin">
+<main class="navbar-margin">
   <form class="pt-5 pb-5" name="searchForm" (ngSubmit)="searchPlaces()">
     <div class="container">
       <div class="row">
-        <div class="form-group col-md-6">
-          <label for="location">Vieta</label>
-          <input type="text" name="location" class="form-control" id="location" [(ngModel)]="search.location" placeholder="Riga">
+
+        <div class="input-group main-input col-lg-6 col-md-6 pb-5">
+          <div class="input-group-prepend">
+            <i class="fas fa-search input-group-text"></i>
+          </div>
+          <input name="query" aria-label="Meklēšanas lauks" class="form-control" id="query" type="text" placeholder="Kafejnīcas Rīgā"
+            [(ngModel)]="search.query">
         </div>
-        <div class="form-group col-md-6">
+
+        <div class="col-md-12 search-title pt-3"></div>
+        <div class="form-group col-lg-4 col-md-6">
+          <label for="location">Vieta</label>
+          <div class="input-group">
+            <div (click)="getLocation()" class="input-group-prepend location-button">
+              <i class="fas fa-map-marker input-group-text"></i>
+            </div>
+            <input type="text" name="location" class="form-control" id="location" [(ngModel)]="search.location" placeholder="Riga">
+          </div>
+        </div>
+        <div class="form-group col-lg-4 col-md-6">
           <label for="radius">Rādiuss</label>
           <input type="number" name="radius" class="form-control" id="radius" [(ngModel)]="search.radius" min="0" max="50000">
         </div>
-        <div class="form-group col-md-6">
-          <label for="name">Nosaukums</label>
-          <input type="text" name="name" class="form-control" id="name" [(ngModel)]="search.name" placeholder="Opera">
-        </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-lg-4 col-md-6">
           <label for="type">Kategorija</label>
           <input type="text" name="type" class="form-control" id="type" [(ngModel)]="search.type" list="categories">
           <datalist id="categories">
             <option *ngFor="let c of categories">{{c.title}}</option>
           </datalist>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-lg-4 col-md-3">
           <label for="minPriceLevel">Cenas no</label>
           <input type="number" name="minPriceLevel" class="form-control" [(ngModel)]="search.minPriceLevel" id="minPriceLevel" placeholder="1"
             min="1" max="4">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-lg-4 col-md-3">
           <label for="maxPriceLevel">līdz</label>
           <input type="number" name="maxPriceLevel" class="form-control" [(ngModel)]="search.maxPriceLevel" id="maxPriceLevel" placeholder="4"
             min="1" max="4">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-lg-4 col-md-3">
           <label for="openNow">Ir atvērts</label>
           <select class="form-control" name="openNow" id="openNow" [(ngModel)]="search.openNow">
             <option> </option>
             <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
           </select>
         </div>
+
       </div>
-      <button type="submit" class="btn btn-primary">Meklēt</button>
-      <button type="reset" class="btn btn-primary">Notīrīt</button>
+      <button type="submit" class="btn btn-primary" aria-label="Meklēt">Meklēt</button>
+      <button type="reset" class="btn btn-primary" aria-label="Notīrīt">Notīrīt</button>
     </div>
   </form>
+
   <div id="map"></div>
-  <div class="row">
-    <div class="col-md-4 text-center p-3 place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
-      <h3 class="display-5">{{place.name}}</h3>
-      <p class="lead">{{place.vicinity}}</p>
-      <img *ngIf="place.photos" class="rounded-circle" height="140" width="140" src={{getPhoto(place)}} />
-      <i *ngIf="!place.photos" class="fas fa-globe"></i>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
+        <h4 class="display-5">{{place.name}}</h4>
+        <p class="lead">{{place.vicinity}}</p>
+        <img *ngIf="place.photos" src="{{getPhoto(place)}}" class="rounded-circle" alt="{{place.name}}" />
+        <i *ngIf="!place.photos" class="fas fa-globe"></i>
+      </div>
     </div>
   </div>
 
-</div>
+</main>

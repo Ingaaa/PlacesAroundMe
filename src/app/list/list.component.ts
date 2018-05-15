@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { AppService } from '../app.service';
+import { AppService } from '../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -51,7 +51,6 @@ export class ListComponent implements OnInit {
               complete: () => { }
             });
         });
-        console.log(data);
         this.places = places;
       }
     });
@@ -59,7 +58,7 @@ export class ListComponent implements OnInit {
 
   getPhoto(place) {
     if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxWidth: 140 });
+      return place.photos[0].getUrl({ maxWidth: 140, maxHeight: 140 });
     }
   }
 

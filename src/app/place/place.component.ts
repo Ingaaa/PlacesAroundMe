@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Common } from '../common';
-import { AppService } from '../app.service';
+import { AppService } from '../services/app.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -76,8 +76,11 @@ export class PlaceComponent implements OnInit {
         this.ratings.push('half-empty');
       }
     }
+
     const marker = new google.maps.Marker({
-      map: this.map, position: this.place.geometry.location,
+      map: this.map,
+      position: this.place.geometry.location,
+      title: this.place.name,
       icon: 'https://mt.google.com/vt/icon?psize=30&color=ff304C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
     });
     this.loaded = true;

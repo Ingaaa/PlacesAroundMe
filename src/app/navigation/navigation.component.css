@@ -7,6 +7,7 @@
     transition: ease-in-out background-color .15s, ease-in-out color .15s;
     color: #fff;
 }
+
 .navbar .navbar-toggler {
     border: none;
 }
@@ -25,7 +26,7 @@
 
 .navbar a.nav-link:hover, .navbar a.nav-link:active, .navbar a.nav-link.active {
     background-color: var(--yellow);
-    color:  var(--purple);
+    color: var(--purple);
 }
 
 nav .navbar-nav .nav-link, nav .navbar-brand, nav .navbar-toggler {

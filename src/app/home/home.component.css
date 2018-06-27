@@ -1,23 +1,11 @@
 .home-picture {
-    background-image: url("../../assets/img/home767x479.webp");
+    background-image: url("../../assets/img/home590x740.jpg");
     background-repeat: no-repeat;
-    background-color: #cccccc;
+    background-color: var(--purple);
     background-position: center;
     background-size: cover;
     height: 500px;
     display: flex;
-}
-
-@media (min-width: 768px) {
-    .home-picture {
-        background-image: url("../../assets/img/home991x496.webp");
-    }
-}
-
-@media (min-width: 992px) {
-    .home-picture {
-        background-image: url("../../assets/img/home2000x1000.webp");
-    }
 }
 
 .input-group.home-input {
@@ -26,11 +14,11 @@
 
 .input-group.home-input input::placeholder {
     color: #fff;
-    opacity: 0.7;
 }
 
 .input-group.home-input input, .input-group.home-input i {
-    line-height: 3rem;
+    line-height: 2rem;
+    font-size: 1rem;
     border: 2px solid white;
     color: white;
     border-radius: 0px;
@@ -51,4 +39,50 @@
 
 .home-input .input-group-append:hover {
     cursor: pointer;
+}
+
+.home-input .input-group-append i {
+    width: 52px;
+}
+
+@media (min-width: 576px) {
+    .home-picture {
+        background-image: url("../../assets/img/home780x320.jpg");
+        height: 320px;
+    }
+}
+
+@media (min-width: 768px) {
+    .home-picture {
+        background-image: url("../../assets/img/home1000x400.jpg");
+        height: 400px;
+    }
+    .input-group.home-input input, .input-group.home-input i {
+        line-height: 3rem;
+        font-size: 1.25rem;
+    }
+    .home-input .input-group-append i {
+        width: 68px;
+    }
+}
+
+@media (min-width: 992px) {
+    .home-picture {
+        background-image: url("../../assets/img/home1210x490.jpg");
+        height: 490px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-picture {
+        background-image: url("../../assets/img/home2000x1000.jpg");
+        height: 550px;
+    }
+}
+
+@media (min-width: 2000px) {
+    .home-picture {
+        background-size: contain;
+        height: 600px;
+    }
 }

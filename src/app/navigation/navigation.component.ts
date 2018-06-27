@@ -13,6 +13,7 @@ export class NavigationComponent implements OnInit {
   logedIn: boolean = false;
   isCollapsed: boolean = true;
   user;
+  showShare: boolean = navigator['share'] != null ? true : false;
 
   constructor(private service: UserService) { }
 
@@ -43,6 +44,18 @@ export class NavigationComponent implements OnInit {
 
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  share() {
+    if (navigator['share']) {
+      navigator['share']({
+        title: 'Vietas man apkārt',
+        text: 'Apskaties šo vietni - tā ir labākā!',
+        url: 'https://placesaroundme-9b752.firebaseapp.com',
+      })
+        .then(() => { })
+        .catch((error) => { });
+    }
   }
 
 }

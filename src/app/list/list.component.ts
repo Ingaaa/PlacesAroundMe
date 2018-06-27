@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
         this.placesService = new google.maps.places.PlacesService(document.createElement('div'));
         data.forEach((element) => {
           this.service.getPlaceDetails(this.placesService, { placeId: element['id'] })
-            .subscribe({
+            ({
               next: (place) => places.push(place),
               error: () => { },
               complete: () => { }

@@ -11,13 +11,25 @@ import { UserService } from '../services/user.service';
 })
 export class PlaceComponent implements OnInit {
   private placesService: google.maps.places.PlacesService;
-  private place: google.maps.places.PlaceResult;
+  place: google.maps.places.PlaceResult;
   private map: google.maps.Map;
   private id: string;
   private ratings: string[] = [];
   loaded: boolean = false;
   private userUID: string;
   private lists;
+  private jsonLdTemplate = {
+    '@context': 'http://schema.org',
+    '@type': 'Place',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Denver',
+      'addressRegion': 'CO',
+      'postalCode': '80209',
+      'streetAddress': '7 S. Broadway'
+    },
+    'name': 'The Hi-Dive'
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -29,8 +41,10 @@ export class PlaceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getLocation(false).subscribe({
-      next: this.setLocation
+    this.service.getLocation(false)({
+      next: this.setLocation,
+      error: () => { },
+      complete: () => { }
     });
 
     this.userService.authState().subscribe({
@@ -56,7 +70,7 @@ export class PlaceComponent implements OnInit {
     const marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: 'Esmu te!' });
     this.placesService = new google.maps.places.PlacesService(this.map);
     this.service.getPlaceDetails(this.placesService, { placeId: this.id })
-      .subscribe({
+      ({
         next: this.setPlace,
         error: () => { },
         complete: () => { }
@@ -93,7 +107,9 @@ export class PlaceComponent implements OnInit {
         this.lists.forEach(element => {
           this.findPlaceInList(element);
         });
-      }
+      },
+      error: () => { },
+      complete: () => { }
     });
   }
 
@@ -105,7 +121,9 @@ export class PlaceComponent implements OnInit {
         } else {
           list.added = false;
         }
-      }
+      },
+      error: () => { },
+      complete: () => { }
     });
   }
 
@@ -115,5 +133,9 @@ export class PlaceComponent implements OnInit {
     } else {
       this.userService.addToUserList(this.id, this.userUID, list.id);
     }
+  }
+
+  createJsonLd() {
+
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Common } from '../common';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AppService {
@@ -10,9 +9,8 @@ export class AppService {
         private common: Common
     ) { }
 
-    getLocation(reload: boolean): Observable<any> {
-
-        return new Observable((observer) => {
+    getLocation(reload: boolean) {
+        return ((observer) => {
             if (this.common.location != null && reload === false) {
                 observer.next();
                 observer.complete();
@@ -37,9 +35,8 @@ export class AppService {
     }
 
     searchPlaces(googleMapsService: google.maps.places.PlacesService,
-        body: google.maps.places.PlaceSearchRequest): Observable<any> {
-
-        return new Observable((observer) => {
+        body: google.maps.places.PlaceSearchRequest) {
+        return ((observer) => {
             googleMapsService.nearbySearch(body,
                 (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -53,9 +50,8 @@ export class AppService {
     }
 
     placesTextSearch(googleMapsService: google.maps.places.PlacesService,
-        body: google.maps.places.TextSearchRequest): Observable<any> {
-
-        return new Observable((observer) => {
+        body: google.maps.places.TextSearchRequest) {
+        return ((observer) => {
             googleMapsService.textSearch(body,
                 (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -68,9 +64,8 @@ export class AppService {
         });
     }
 
-    geoCode(): Observable<any> {
-
-        return new Observable((observer) => {
+    geoCode() {
+        return ((observer) => {
             this.geo.geocode({
                 location: this.common.location
             }, (data: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
@@ -84,9 +79,8 @@ export class AppService {
         });
     }
 
-    getPlaceDetails(placesService: google.maps.places.PlacesService, body: google.maps.places.PlaceDetailsRequest): Observable<any> {
-
-        return new Observable((observer) => {
+    getPlaceDetails(placesService: google.maps.places.PlacesService, body: google.maps.places.PlaceDetailsRequest) {
+        return ((observer) => {
             placesService.getDetails(body, (data: google.maps.places.PlaceResult, status: google.maps.places.PlacesServiceStatus) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     observer.next(data);

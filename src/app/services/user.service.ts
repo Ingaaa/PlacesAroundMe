@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-    private listsCollection: AngularFirestoreCollection<any> =
-        this.afs.collection<any>('Lists');
+    private listsCollection: AngularFirestoreCollection<any>;
     private readonly lists = [
         { title: 'Favorīti', key: 'favourites' },
         { title: 'Vēlos apmeklēt', key: 'toVisit' },
@@ -17,6 +15,9 @@ export class UserService {
     constructor(
         private angularFire: AngularFireAuth,
         private afs: AngularFirestore) {
+        afs.firestore.settings({ timestampsInSnapshots: true });
+        // afs.firestore.enablePersistence();
+        this.listsCollection = this.afs.collection<any>('Lists');
     }
 
     register(email: string, password: string) {
@@ -35,7 +36,7 @@ export class UserService {
         return this.angularFire.auth.signOut();
     }
 
-    authState(): Observable<firebase.User> {
+    authState() {
         return this.angularFire.authState;
     }
 

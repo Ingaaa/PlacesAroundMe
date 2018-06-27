@@ -2,12 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCollapseModule, NgbTooltipModule, NgbCarouselModule,
+  NgbModalModule, NgbTabsetModule
+} from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { } from '@types/googlemaps';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { environment } from './../environments/environment';
 import { AppService } from './services/app.service';
@@ -47,9 +52,14 @@ const appRoutes: Routes = [
     NotfoundComponent
   ],
   imports: [
+    LazyLoadImageModule,
     BrowserModule,
     FormsModule,
-    NgbModule.forRoot(),
+    NgbCollapseModule.forRoot(),
+    NgbTooltipModule.forRoot(),
+    NgbCarouselModule.forRoot(),
+    NgbModalModule.forRoot(),
+    NgbTabsetModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
     ),

@@ -36,7 +36,7 @@ export class PlacesComponent implements OnInit {
   }
 
   getLocation() {
-    this.service.getLocation(true).subscribe({
+    this.service.getLocation(true)({
       next: this.setLocation,
       error: () => { },
       complete: () => { }
@@ -47,7 +47,7 @@ export class PlacesComponent implements OnInit {
     this.map.setCenter(this.common.location);
     const marker = new google.maps.Marker({ map: this.map, position: this.common.location, title: 'Esmu te!' });
 
-    this.service.geoCode().subscribe({
+    this.service.geoCode()({
       next: (data) => {
         this.search.location = data[0].formatted_address;
       },
@@ -70,7 +70,7 @@ export class PlacesComponent implements OnInit {
       if (body.type) {
         body.type = this.findTypeValue(body.type);
       }
-      this.service.placesTextSearch(this.googleMapsService, body).subscribe({
+      this.service.placesTextSearch(this.googleMapsService, body)({
         next: this.setPlaces,
         error: () => { },
         complete: () => { }

@@ -1,7 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "assets/web-fonts-with-css/css/fontawesome-all.min.css";
 :root {
-    --pink: #BC519E;
+    --pink: #B84799;
     --purple: #49205E;
     --yellow: #D9E254;
     --light-purple: #6E3F73;
@@ -66,7 +66,7 @@ button, .home-input {
 }
 
 .place-card .fas.fa-globe {
-    font-size: 100px;
+    font-size: 120px;
 }
 
 .place-card {
@@ -115,4 +115,9 @@ button, .home-input {
 
 .navbar-margin {
     margin-top: 56px;
+}
+
+.ng-lazyloaded {
+    object-fit: cover;
+    height: 120px;
 }

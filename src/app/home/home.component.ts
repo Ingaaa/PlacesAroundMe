@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   getPhoto(place) {
     if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxWidth: 140, maxHeight: 140 });
+      return place.photos[0].getUrl({ maxHeight: 140 });
     }
   }
 
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       location: this.common.defaultLocation,
       radius: 500,
       type: 'cafe'
-    }).subscribe({
+    })({
       next: (data) => {
         this.places = data;
         this.loaded = true;

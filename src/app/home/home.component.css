@@ -8,6 +8,18 @@
     display: flex;
 }
 
+.input-group.home-input input.form-control:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: white;
+        background: transparent;
+    }
+}
+
 .input-group.home-input {
     min-width: 200px;
 }

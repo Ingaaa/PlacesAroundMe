@@ -1,0 +1,14 @@
+.place-image {
+    height: 120px;
+    width: 120px;
+    display: inline-block;
+}
+
+.place-image>.fas.fa-globe {
+    font-size: 120px;
+}
+
+.ng-lazyloaded {
+    object-fit: cover;
+    height: 120px;
+}

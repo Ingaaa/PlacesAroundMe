@@ -3,10 +3,6 @@
     typeof="Place">
     <h4 class="display-5" property="name">{{place.name}}</h4>
     <p *ngIf="place.vicinity" class="lead" property="address">{{place.vicinity}}</p>
-    <div class="place-image">
-      <img *ngIf="place.photos" property="photo" [lazyLoad]="getPhoto(place)" [offset]="300" class="rounded-circle" alt="{{place.name}}"
-        height="120" width="120">
-      <i *ngIf="!place.photos" class="fas fa-globe"></i>
-    </div>
+    <app-place-photo [place]="place"></app-place-photo>
   </div>
 </div>

@@ -12,11 +12,4 @@ export class PlaceListComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  getPhoto(place) {
-    if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxHeight: 140 });
-    }
-  }
-
 }

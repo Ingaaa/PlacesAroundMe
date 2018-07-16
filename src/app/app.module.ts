@@ -29,6 +29,8 @@ import { ListComponent } from './list/list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PlaceListComponent } from './place-list/place-list.component';
 import { LoaderComponent } from './loader/loader.component';
+import { PlacePhotoComponent } from './place-photo/place-photo.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,7 +54,9 @@ const appRoutes: Routes = [
     ListComponent,
     NotfoundComponent,
     PlaceListComponent,
-    LoaderComponent
+    LoaderComponent,
+    PlacePhotoComponent,
+    FooterComponent
   ],
   imports: [
     LazyLoadImageModule,

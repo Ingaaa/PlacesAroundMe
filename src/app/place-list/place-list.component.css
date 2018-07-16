@@ -15,10 +15,6 @@
     background-color: var(--light-purple);
 }
 
-.place-card .fas.fa-globe {
-    font-size: 120px;
-}
-
 .place-card {
     color: #fff;
     transition: box-shadow .3s;
@@ -61,9 +57,4 @@
     100% {
         opacity: 1;
     }
-}
-
-.ng-lazyloaded {
-    object-fit: cover;
-    height: 120px;
 }

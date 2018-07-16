@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   placesService: google.maps.places.PlacesService;
   places: google.maps.places.PlaceResult[];
-  loaded: boolean = false;
+  loading: boolean = true;
   search: { query } = { query: '' };
 
   constructor(
@@ -24,12 +24,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.placesService = new google.maps.places.PlacesService(document.createElement('div'));
     this.loadPlaces();
-  }
-
-  getPhoto(place) {
-    if ((place.photos != null) && place.photos.length > 0) {
-      return place.photos[0].getUrl({ maxHeight: 140 });
-    }
   }
 
   searchPlaces() {
@@ -46,10 +40,9 @@ export class HomeComponent implements OnInit {
     })({
       next: (data) => {
         this.places = data;
-        this.loaded = true;
       },
       error: () => { },
-      complete: () => { }
+      complete: () => { this.loading = false; }
     });
   }
 }

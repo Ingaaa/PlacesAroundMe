@@ -48,63 +48,6 @@ button, .home-input {
     background-color: var(--purple);
 }
 
-.place-card:nth-of-type(4n+1) {
-    background-color: var(--purple);
-}
-
-.place-card:nth-of-type(4n+2) {
-    background-color: var(--pink);
-}
-
-.place-card:nth-of-type(4n+3) {
-    background-color: var(--yellow);
-    color: var(--purple);
-}
-
-.place-card:nth-of-type(4n+4) {
-    background-color: var(--light-purple);
-}
-
-.place-card .fas.fa-globe {
-    font-size: 120px;
-}
-
-.place-card {
-    color: #fff;
-    transition: box-shadow .3s;
-    -webkit-animation: appear .6s linear 1;
-    /* Safari */
-    animation: appear .6s linear 1;
-    border: 5px solid white;
-}
-
-.place-card:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-    z-index: 999;
-    cursor: pointer;
-    outline: none;
-}
-
-/* Safari */
-
-@-webkit-keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
 .ng-valid[required], .ng-valid.required {
     border-left: 5px solid #42A948;
 }
@@ -115,9 +58,4 @@ button, .home-input {
 
 .view {
     margin-top: 56px;
-}
-
-.ng-lazyloaded {
-    object-fit: cover;
-    height: 120px;
 }

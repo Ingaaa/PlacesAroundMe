@@ -1,27 +1,19 @@
 <div class="container-fluid view">
-  <div class="row">
 
-    <div class="home-picture col-md-12">
-      <div class="col-md-6 text-center m-auto align-middle">
-        <form name="homeForm">
-          <div class="input-group home-input">
-            <input name="query" class="form-control form-control-lg" type="text" placeholder="Kafejnīcas Rīgā" [(ngModel)]="search.query"
-              (keyup.enter)="searchPlaces()" aria-label="Meklēšanas lauks">
-            <div class="input-group-append" (click)="searchPlaces()">
-              <i class="fas fa-search input-group-text"></i>
-            </div>
+  <div class="home-picture row justify-content-center">
+    <div class="col-md-6 col-sm-8 col-xs-12 align-self-center">
+      <form name="homeForm">
+        <div class="input-group home-input">
+          <input name="query" class="form-control form-control-lg" type="text" placeholder="Kafejnīcas Rīgā" [(ngModel)]="search.query"
+            (keyup.enter)="searchPlaces()" aria-label="Meklēšanas lauks">
+          <div class="input-group-append" (click)="searchPlaces()">
+            <i class="fas fa-search input-group-text"></i>
           </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="col-md-4 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}" vocab="http://schema.org/"
-      typeof="Place">
-      <h4 class="display-5" property="name">{{place.name}}</h4>
-      <p class="lead" property="address">{{place.vicinity}}</p>
-      <img *ngIf="place.photos" property="photo" [lazyLoad]="getPhoto(place)" [offset]="100" class="rounded-circle" alt="{{place.name}}"
-        height="120" width="120">
-      <i *ngIf="!place.photos" class="fas fa-globe"></i>
+        </div>
+      </form>
     </div>
   </div>
+
+  <app-loader class="row"></app-loader>
+  <app-place-list [places]="places"></app-place-list>
 </div>

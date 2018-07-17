@@ -1,0 +1,22 @@
+footer {
+    color: #fff;
+    background-color: var(--purple);
+}
+
+footer a {
+    color: #fff;
+}
+
+.footer-copyright {
+    background-color: var(--light-purple);
+}
+
+footer hr {
+    margin: 0 15%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer h6 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

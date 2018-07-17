@@ -13,7 +13,6 @@
 
 .cs-loader-inner label {
     font-size: 20px;
-    opacity: 0;
     display: inline-block;
 }
 
@@ -85,8 +84,9 @@
     }
 }
 
-.stopLoading>.cs-loader-inner label {
+.stopLoading>.cs-loader-inner label, .stopLoading {
     animation: disappear .6s linear 1;
+    animation-fill-mode: both;
 }
 
 @-webkit-keyframes disappear {

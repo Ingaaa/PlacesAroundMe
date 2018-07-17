@@ -23,7 +23,6 @@
     animation: appear .6s linear;
     animation-fill-mode: both;
     border: 5px solid white;
-    position: relative;
     min-height: 180px;
 }
 
@@ -35,8 +34,8 @@
 }
 
 .placeList {
-    position: relative;
-    top: -70px;
+    min-height: 70px;
+    margin-top: -70px;
 }
 
 /* Safari */

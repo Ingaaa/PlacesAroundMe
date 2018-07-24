@@ -2,9 +2,15 @@
   height: 500px;
 }
 
+.input-group.main-input {
+  padding: 0px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
 .input-group.main-input input, .input-group.main-input i {
   line-height: 2rem;
-  border: 2px solid var(--yellow);
+  border: 1px solid var(--yellow);
   background-color: transparent;
 }
 
@@ -13,22 +19,43 @@
 }
 
 .input-group.main-input i {
-  border-right: none;
+  width: 48px;
+  border-left: none;
   color: var(--yellow);
 }
 
-.main-input input:hover, .main-input input:focus {
-  box-shadow: 0px 0px 5px var(--yellow);
+.input-group.main-input i:hover {
+  cursor: pointer;
 }
 
-.input-group-prepend.location-button:hover {
+.main-input:hover {
+  box-shadow: 0px 0px 4px var(--yellow);
+}
+
+.input-group-append.location-button:hover {
   cursor: pointer;
 }
 
 .search-title {
-  border-top: 2px solid var(--yellow);
+  border-top: 1px solid var(--yellow);
 }
 
 .fas {
   line-height: 1.5;
+}
+
+button.btn.btn-outline-primary.toogle-button {
+  margin: 5px 0px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  color: white;
+}
+
+button.btn.btn-outline-primary.toogle-button.expanded {
+  transform: rotate(180deg);
+  background-color: white;
+  color: var(--yellow);
 }

@@ -18,6 +18,8 @@ export class PlacesComponent implements OnInit {
   places: google.maps.places.PlaceResult[];
   categories = this.common.categories;
   openOptions = this.common.openOptions;
+  isCollapsed = true;
+  loading = false;
 
   constructor(
     private common: Common,
@@ -33,6 +35,9 @@ export class PlacesComponent implements OnInit {
       zoom: 15
     });
     this.googleMapsService = new google.maps.places.PlacesService(this.map);
+    if (this.search.query) {
+      this.searchPlaces();
+    }
   }
 
   getLocation() {
@@ -57,25 +62,27 @@ export class PlacesComponent implements OnInit {
   }
 
   searchPlaces() {
-    if (this.search.query != null && this.search.query !== '') {
-      const body = this.copyObject(this.search);
-      if (this.googleAutocompleteService.getPlace() != null) {
-        body.location = this.googleAutocompleteService.getPlace().geometry.location;
-      } else {
-        body.location = this.common.location;
-      }
-      if (body.radius == null) {
-        body.radius = 1000;
-      }
-      if (body.type) {
-        body.type = this.findTypeValue(body.type);
-      }
-      this.service.placesTextSearch(this.googleMapsService, body)({
-        next: this.setPlaces,
-        error: () => { },
-        complete: () => { }
-      });
+    const body = this.copyObject(this.search);
+    if (this.googleAutocompleteService.getPlace() != null) {
+      body.location = this.googleAutocompleteService.getPlace().geometry.location;
+    } else {
+      body.location = this.common.location;
     }
+    if (body.radius == null) {
+      body.radius = 1000;
+    }
+    if (body.type) {
+      body.type = this.findTypeValue(body.type);
+    }
+
+    this.loading = true;
+    this.service.placesTextSearch(this.googleMapsService, body)({
+      next: this.setPlaces,
+      error: () => { },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
 
   setPlaces = (data) => {

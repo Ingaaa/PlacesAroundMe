@@ -1,72 +1,90 @@
 <main class="view">
-  <form class="pt-5 pb-5" name="searchForm" (ngSubmit)="searchPlaces()">
-    <div class="container">
+  <form name="searchForm" (ngSubmit)="searchPlaces()">
+    <div class="container pt-4 pb-3 pt-md-5 pb-md-5">
       <div class="row">
 
-        <div class="input-group main-input col-lg-6 col-md-6 pb-5">
-          <div class="input-group-prepend">
-            <i class="fas fa-search input-group-text"></i>
-          </div>
-          <input name="query" aria-label="Meklēšanas lauks" class="form-control" id="query" type="text" placeholder="Kafejnīcas Rīgā"
-            [(ngModel)]="search.query">
-        </div>
+        <div class="col-md-12">
+          <div class="row">
 
-        <div class="col-md-12 search-title pt-3"></div>
-        <div class="form-group col-lg-4 col-md-6">
-          <label for="location">Vieta</label>
-          <div class="input-group">
-            <div (click)="getLocation()" class="input-group-prepend location-button">
-              <i class="fas fa-map-marker input-group-text"></i>
+            <div class="input-group main-input col-lg-6 col-md-6">
+              <input name="query" aria-label="Meklēšanas lauks" class="form-control" id="query" type="text" placeholder="Kafejnīcas Rīgā"
+                [(ngModel)]="search.query">
+              <div class="input-group-append">
+                <i class="fas fa-search input-group-text"></i>
+              </div>
             </div>
-            <input type="text" name="location" class="form-control" id="location" [(ngModel)]="search.location" placeholder="Riga">
+
+            <div class="col">
+              <button type="submit" [ngClass]="{'expanded': !isCollapsed}" class="btn btn-outline-primary toogle-button" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSearch">
+                <i class="fas fa-angle-double-down"></i>
+              </button>
+            </div>
+
           </div>
         </div>
-        <div class="form-group col-lg-4 col-md-6">
-          <label for="radius">Rādiuss</label>
-          <input type="number" name="radius" class="form-control" id="radius" [(ngModel)]="search.radius" min="0" max="50000">
-        </div>
-        <div class="form-group col-lg-4 col-md-6">
-          <label for="type">Kategorija</label>
-          <input type="text" name="type" class="form-control" id="type" [(ngModel)]="search.type" list="categories">
-          <datalist id="categories">
-            <option *ngFor="let c of categories">{{c.title}}</option>
-          </datalist>
-        </div>
-        <div class="form-group col-lg-4 col-md-3">
-          <label for="minPriceLevel">Cenas no</label>
-          <input type="number" name="minPriceLevel" class="form-control" [(ngModel)]="search.minPriceLevel" id="minPriceLevel" placeholder="1"
-            min="1" max="4">
-        </div>
-        <div class="form-group col-lg-4 col-md-3">
-          <label for="maxPriceLevel">līdz</label>
-          <input type="number" name="maxPriceLevel" class="form-control" [(ngModel)]="search.maxPriceLevel" id="maxPriceLevel" placeholder="4"
-            min="1" max="4">
-        </div>
-        <div class="form-group col-lg-4 col-md-3">
-          <label for="openNow">Ir atvērts</label>
-          <select class="form-control" name="openNow" id="openNow" [(ngModel)]="search.openNow">
-            <option> </option>
-            <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
-          </select>
-        </div>
 
+        <div class="col-md-12">
+          <div class="row pt-3 pt-md-5" id="collapseSearch" [ngbCollapse]="isCollapsed">
+
+            <div class="col-md-12 search-title pt-3 pt-md-4"></div>
+
+            <div class="form-group col-lg-4 col-md-6">
+              <label for="location">Vieta</label>
+              <div class="input-group">
+                <div (click)="getLocation()" class="input-group-prepend location-button">
+                  <i class="fas fa-map-marker input-group-text"></i>
+                </div>
+                <input type="text" name="location" class="form-control" id="location" [(ngModel)]="search.location" placeholder="Riga">
+              </div>
+            </div>
+
+            <div class="form-group col-lg-4 col-md-6">
+              <label for="radius">Rādiuss</label>
+              <input type="number" name="radius" class="form-control" id="radius" [(ngModel)]="search.radius" min="0" max="50000">
+            </div>
+
+            <div class="form-group col-lg-4 col-md-6">
+              <label for="type">Kategorija</label>
+              <input type="text" name="type" class="form-control" id="type" [(ngModel)]="search.type" list="categories">
+              <datalist id="categories">
+                <option *ngFor="let c of categories">{{c.title}}</option>
+              </datalist>
+            </div>
+
+            <div class="form-group col-lg-4 col-md-3">
+              <label for="minPriceLevel">Cenas no</label>
+              <input type="number" name="minPriceLevel" class="form-control" [(ngModel)]="search.minPriceLevel" id="minPriceLevel" placeholder="1"
+                min="1" max="4">
+            </div>
+
+            <div class="form-group col-lg-4 col-md-3">
+              <label for="maxPriceLevel">līdz</label>
+              <input type="number" name="maxPriceLevel" class="form-control" [(ngModel)]="search.maxPriceLevel" id="maxPriceLevel" placeholder="4"
+                min="1" max="4">
+            </div>
+
+            <div class="form-group col-lg-4 col-md-3">
+              <label for="openNow">Ir atvērts</label>
+              <select class="form-control" name="openNow" id="openNow" [(ngModel)]="search.openNow">
+                <option> </option>
+                <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary" aria-label="Meklēt">Meklēt</button>
+              <button type="reset" class="btn btn-primary" aria-label="Notīrīt">Notīrīt</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary" aria-label="Meklēt">Meklēt</button>
-      <button type="reset" class="btn btn-primary" aria-label="Notīrīt">Notīrīt</button>
     </div>
   </form>
 
   <div id="map"></div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}">
-        <h4 class="display-5">{{place.name}}</h4>
-        <p class="lead">{{place.vicinity}}</p>
-        <img *ngIf="place.photos" src="{{getPhoto(place)}}" class="rounded-circle" alt="{{place.name}}" />
-        <i *ngIf="!place.photos" class="fas fa-globe"></i>
-      </div>
-    </div>
-  </div>
+  <app-loader [loading]="loading" class="row"></app-loader>
+  <app-place-list [places]="places"></app-place-list>
 
 </main>

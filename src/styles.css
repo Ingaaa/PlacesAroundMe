@@ -24,25 +24,21 @@ button, .home-input {
     transition: box-shadow .3s;
 }
 
-.btn.btn-primary:focus, .btn.btn-primary.focus {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+button.btn.btn-primary {
+    background-color: var(--purple) !important;
+    border: none !important;
 }
 
-.btn.btn-primary, .btn.btn-primary:active {
-    background-color: var(--purple);
-    border: none;
+button.btn.btn-primary:active, button.btn.btn-primary.active {
+    background-color: var(--yellow) !important;
 }
 
-.btn.btn-primary:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-}
-
-.btn.btn-outline-dark {
+button.btn.btn-outline-dark {
     color: var(--purple);
     border-color: var(--purple);
 }
 
-.btn.btn-outline-dark:hover, .btn.btn-outline-dark:active {
+button.btn.btn-outline-dark:hover, button.btn.btn-outline-dark:active {
     color: #fff;
     border-color: var(--purple);
     background-color: var(--purple);

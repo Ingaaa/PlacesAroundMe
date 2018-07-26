@@ -1,0 +1,19 @@
+{
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgot.password": "Forgot password",
+    "confirm.password": "Confirm password",
+    "close": "Close",
+    "places.around.me": "Places around me",
+    "home": "Home",
+    "search": "Find places",
+    "my.places": "My places",
+    "location": "Location",
+    "radius": "Radius",
+    "category": "Category",
+    "price.from": "Price from",
+    "to": "To",
+    "open"
+}

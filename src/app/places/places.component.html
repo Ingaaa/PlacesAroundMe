@@ -4,18 +4,18 @@
       <div class="row">
 
         <div class="col-md-12">
-          <div class="row">
+          <div class="row justify-content-center">
 
-            <div class="input-group main-input col-lg-6 col-md-6">
+            <div class="input-group main-input col-md-6">
               <input name="query" aria-label="Meklēšanas lauks" class="form-control" id="query" type="text" placeholder="Kafejnīcas Rīgā"
                 [(ngModel)]="search.query">
-              <div class="input-group-append">
+              <div class="input-group-append" (click)="searchPlaces()">
                 <i class="fas fa-search input-group-text"></i>
               </div>
             </div>
 
-            <div class="col">
-              <button type="submit" [ngClass]="{'expanded': !isCollapsed}" class="btn btn-outline-primary toogle-button" (click)="isCollapsed = !isCollapsed"
+            <div class="toogle-button-parent col-md-2 pt-3 pt-md-0">
+              <button type="button" [ngClass]="{'expanded': !isCollapsed}" class="btn btn-outline-primary toogle-button" (click)="isCollapsed = !isCollapsed"
                 [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSearch">
                 <i class="fas fa-angle-double-down"></i>
               </button>
@@ -30,7 +30,7 @@
             <div class="col-md-12 search-title pt-3 pt-md-4"></div>
 
             <div class="form-group col-lg-4 col-md-6">
-              <label for="location">Vieta</label>
+              <label for="location" i18n="@@location">Location</label>
               <div class="input-group">
                 <div (click)="getLocation()" class="input-group-prepend location-button">
                   <i class="fas fa-map-marker input-group-text"></i>
@@ -40,12 +40,12 @@
             </div>
 
             <div class="form-group col-lg-4 col-md-6">
-              <label for="radius">Rādiuss</label>
+              <label for="radius" i18n="@@radius">Radius</label>
               <input type="number" name="radius" class="form-control" id="radius" [(ngModel)]="search.radius" min="0" max="50000">
             </div>
 
             <div class="form-group col-lg-4 col-md-6">
-              <label for="type">Kategorija</label>
+              <label for="type" i18n="@@category">Category</label>
               <input type="text" name="type" class="form-control" id="type" [(ngModel)]="search.type" list="categories">
               <datalist id="categories">
                 <option *ngFor="let c of categories">{{c.title}}</option>
@@ -53,19 +53,19 @@
             </div>
 
             <div class="form-group col-lg-4 col-md-3">
-              <label for="minPriceLevel">Cenas no</label>
+              <label for="minPriceLevel" i18n="@@priceFrom">Price from</label>
               <input type="number" name="minPriceLevel" class="form-control" [(ngModel)]="search.minPriceLevel" id="minPriceLevel" placeholder="1"
                 min="1" max="4">
             </div>
 
             <div class="form-group col-lg-4 col-md-3">
-              <label for="maxPriceLevel">līdz</label>
+              <label for="maxPriceLevel" i18n="@@to">to</label>
               <input type="number" name="maxPriceLevel" class="form-control" [(ngModel)]="search.maxPriceLevel" id="maxPriceLevel" placeholder="4"
                 min="1" max="4">
             </div>
 
             <div class="form-group col-lg-4 col-md-3">
-              <label for="openNow">Ir atvērts</label>
+              <label for="openNow" i18n="@@open">Open</label>
               <select class="form-control" name="openNow" id="openNow" [(ngModel)]="search.openNow">
                 <option> </option>
                 <option *ngFor="let o of openOptions" [ngValue]="o.value">{{o.title}}</option>
@@ -84,7 +84,10 @@
 
   <div id="map"></div>
 
-  <app-loader [loading]="loading" class="row"></app-loader>
   <app-place-list [places]="places"></app-place-list>
+  <button *ngIf="getNextPage" type="button" (click)="getNextPage()" class="btn btn-primary show-more mt-4 mb-4 mx-auto" aria-label="Parādīt vairāk">
+    <i class="fas fa-angle-double-down"></i>
+  </button>
+  <app-loader [loading]="loading" [submitted]="submitted" class="row"></app-loader>
 
 </main>

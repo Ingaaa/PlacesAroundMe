@@ -12,4 +12,8 @@ export class PlaceListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  formatAddress(address) {
+    return address.split(',').slice(0, 3).join(',');
+  }
 }

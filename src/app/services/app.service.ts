@@ -53,9 +53,10 @@ export class AppService {
         body: google.maps.places.TextSearchRequest) {
         return ((observer) => {
             googleMapsService.textSearch(body,
-                (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus) => {
+                (data: google.maps.places.PlaceResult[], status: google.maps.places.PlacesServiceStatus,
+                    pagination: google.maps.places.PlaceSearchPagination) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        observer.next(data);
+                        observer.next(data, pagination);
                     } else {
                         observer.error(data);
                     }

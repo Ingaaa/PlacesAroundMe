@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class UserService {
     private listsCollection: AngularFirestoreCollection<any>;
+    private homeListCollection: AngularFirestoreCollection<any>;
     private readonly lists = [
         { title: 'Favorīti', key: 'favourites' },
         { title: 'Vēlos apmeklēt', key: 'toVisit' },
@@ -18,6 +19,7 @@ export class UserService {
         afs.firestore.settings({ timestampsInSnapshots: true });
         // afs.firestore.enablePersistence();
         this.listsCollection = this.afs.collection<any>('Lists');
+        this.homeListCollection = this.afs.collection<any>('HomeList');
     }
 
     register(email: string, password: string) {
@@ -85,5 +87,9 @@ export class UserService {
         return this.afs.collection('Lists').doc(userUID)
             .collection('lists').doc(listID)
             .collection('places').valueChanges();
+    }
+
+    getHomeList() {
+        return this.homeListCollection.valueChanges();
     }
 }

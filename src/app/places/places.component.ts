@@ -20,6 +20,9 @@ export class PlacesComponent implements OnInit {
   openOptions = this.common.openOptions;
   isCollapsed = true;
   loading = false;
+  submitted = false;
+  loadMore = true;
+  getNextPage;
 
   constructor(
     private common: Common,
@@ -74,19 +77,29 @@ export class PlacesComponent implements OnInit {
     if (body.type) {
       body.type = this.findTypeValue(body.type);
     }
+    body.count = 18;
 
     this.loading = true;
+    this.submitted = true;
+    this.loadMore = false;
     this.service.placesTextSearch(this.googleMapsService, body)({
       next: this.setPlaces,
       error: () => { },
       complete: () => {
         this.loading = false;
+        this.loadMore = true;
       }
     });
   }
 
-  setPlaces = (data) => {
-    this.places = data;
+  setPlaces = (data, pagination) => {
+    if (this.loadMore) {
+      this.places = this.places.concat(data);
+    } else {
+      this.places = data;
+    }
+
+
     for (let i = 0; i < this.places.length; i++) {
       const marker = new google.maps.Marker({
         map: this.map, position: this.places[i].geometry.location,
@@ -94,6 +107,11 @@ export class PlacesComponent implements OnInit {
           '/spotlight/spotlight-waypoint-a.png&ax=43&ay=48&text=%E2%80%A2'
       });
     }
+
+    this.getNextPage = pagination.hasNextPage && (() => {
+      this.loading = true;
+      pagination.nextPage();
+    });
   }
 
   copyObject(object) {

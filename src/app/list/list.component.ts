@@ -14,6 +14,8 @@ export class ListComponent implements OnInit {
   private userUID: string;
   places = [];
   private id: string;
+  loading: boolean = false;
+  submitted: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -39,6 +41,7 @@ export class ListComponent implements OnInit {
   }
 
   getListPlaces() {
+    this.loading = true;
     this.userService.getListPlaces(this.userUID, this.id).subscribe({
       next: (data) => {
         const places = [];
@@ -52,6 +55,11 @@ export class ListComponent implements OnInit {
             });
         });
         this.places = places;
+      },
+      error: () => { },
+      complete: () => {
+        console.log(this);
+        this.loading = false;
       }
     });
   }

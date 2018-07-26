@@ -1,4 +1,4 @@
-<div [ngClass]="{'stopLoading':!loading}" class="cs-loader">
+<div *ngIf="submitted" [ngClass]="{'stopLoading':!loading}" class="cs-loader">
     <div class="cs-loader-inner">
         <label> ●</label>
         <label> ●</label>

@@ -87,6 +87,8 @@
 .stopLoading>.cs-loader-inner label, .stopLoading {
     animation: disappear .6s linear 1;
     animation-fill-mode: both;
+    margin-top: -70px;
+    z-index: -999;
 }
 
 @-webkit-keyframes disappear {

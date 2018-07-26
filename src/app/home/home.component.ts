@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppService } from '../services/app.service';
-import { Common } from '../common';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -10,39 +9,40 @@ import { Common } from '../common';
 })
 export class HomeComponent implements OnInit {
 
-  placesService: google.maps.places.PlacesService;
-  places: google.maps.places.PlaceResult[];
+  places;
+  subscription;
   loading: boolean = true;
+  submitted: boolean = true;
   search: { query } = { query: '' };
 
   constructor(
-    private service: AppService,
-    private common: Common,
+    private service: UserService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.placesService = new google.maps.places.PlacesService(document.createElement('div'));
     this.loadPlaces();
   }
 
   searchPlaces() {
-    if (this.search.query != null && this.search.query !== '') {
+    if (this.search.query) {
       this.router.navigate(['/vietas', { query: this.search.query }]);
     }
   }
 
   loadPlaces = () => {
-    this.service.searchPlaces(this.placesService, {
-      location: this.common.defaultLocation,
-      radius: 500,
-      type: 'cafe'
-    })({
+    this.subscription = this.service.getHomeList().subscribe({
       next: (data) => {
         this.places = data;
+        this.loading = false;
+        this.subscription.unsubscribe();
       },
-      error: () => { },
-      complete: () => { this.loading = false; }
+      error: () => {
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      }
     });
   }
 }

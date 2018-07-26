@@ -29,28 +29,39 @@
         <i class="fas fa-link"></i>
         <a [href]="place.website" target="_blank ">{{place.website}}</a>
       </div>
-      <div class="col-md-12" *ngIf="place.opening_hours && place.opening_hours.open_now">
+      <div class="col-md-12" *ngIf="place.opening_hours && place.opening_hours.open_now" i18n="@@open">
         <i class="fas fa-clock"></i>
-        Atvērts
+        Open
       </div>
       <div class="col-md-12" *ngIf="place.opening_hours && !place.opening_hours.open_now">
-        <i class="fas fa-clock"></i>Aizvērts
+        <i class="fas fa-clock" i18n="@@closed"></i>Closed
       </div>
 
       <div *ngIf="place.rating" class="col-md-12" property="aggregateRating" typeof="AggregateRating">
         <meta property="ratingValue" content="{{place.rating}}">
         <meta property="ratingCount" content="{{place.reviews.length}}">
-        <span *ngFor="let rating of ratings">
-          <i class="fas fa-star checked" *ngIf="rating==='checked'"></i>
-          <i class="fas fa-star" *ngIf="rating==='empty'"></i>
-          <i class="fas fa-star-half checked" *ngIf="rating==='half-checked'"></i>
-          <i class="fas fa-star-half fa-flip-horizontal half-empty" *ngIf="rating==='half-empty'"></i>
-        </span>
+
+        <div class="star-ratings">
+          <div class="star-ratings-bottom">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="star-ratings-top" [ngStyle]="{'width': (place.rating)*20 + '%'}">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="place.reviews && place.reviews.length>0" class="col-md-12">
         <div class="dividor col-md-12"></div>
-        <h3>Atsauksmes</h3>
+        <h3 i18n="@@reviews">Reviews</h3>
         <div class="card" *ngFor="let review of place.reviews" property="review" typeof="Review">
           <div class="card-body">
             <div class="col-md-12" property="author" typeof="Person">

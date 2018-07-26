@@ -1,21 +1,26 @@
-.place-card:nth-of-type(4n+1) {
+.place-card:nth-of-type(5n+1) {
     background-color: var(--purple);
 }
 
-.place-card:nth-of-type(4n+2) {
-    background-color: var(--pink);
+.place-card:nth-of-type(5n+2) {
+    background-color: var(--light-purple);
 }
 
-.place-card:nth-of-type(4n+3) {
+.place-card:nth-of-type(5n+3) {
     background-color: var(--yellow);
     color: var(--purple);
 }
 
-.place-card:nth-of-type(4n+4) {
+.place-card:nth-of-type(5n+4) {
+    background-color: var(--pink);
+}
+
+.place-card:nth-of-type(5n+5) {
     background-color: var(--light-purple);
 }
 
 .place-card {
+    opacity: 0.8;
     color: #fff;
     transition: box-shadow .3s;
     -webkit-animation: appear .6s linear;
@@ -33,9 +38,8 @@
     outline: none;
 }
 
-.placeList {
+.place-list {
     min-height: 70px;
-    margin-top: -70px;
 }
 
 /* Safari */

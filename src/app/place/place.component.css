@@ -36,3 +36,29 @@ button.btn.btn-primary.add {
     border-bottom: 2px solid var(--yellow);
     margin: 15px 0px;
 }
+
+.star-ratings {
+    width: 108px;
+    height: 20px;
+    font-size: 16px;
+}
+
+.star-ratings-top {
+    height: 20px;
+    overflow: hidden;
+    z-index: 999;
+    margin-top: -20px;
+    margin-right: -20px;
+}
+
+.star-ratings-top>i {
+    color: var(--yellow);
+}
+
+.star-ratings-bottom {
+    height: 20px;
+}
+
+.star-ratings-bottom>i {
+    color: var(--purple);
+}

@@ -1,0 +1,30 @@
+﻿---footer
+Par vietni
+Palīdzība
+Konfidencialitāte
+Noteikumi
+ Atrodi vietas sev apkārt - veikalus, bankomātus, kafejnīcas un daudzas citas! Izmanto lietotni uz jebkuras ierīces
+          un piekļūsti tai bezsaistē.
+---navigation
+VIETAS MAN APKĀRT
+Sākums
+MEKLĒT VIETAS
+MANAS VIETAS
+IENĀKT/REĢISTRĒTIES
+---place
+Atvērts
+Aizvērts
+Atsauksmes
+---places
+Vieta
+Rādiuss
+Kategorija
+Cena no
+līdz
+Atvērts
+--registration
+E-pasts
+Parole
+Aizmirsi paroli?
+Parole atkārtoti
+Aizvērt

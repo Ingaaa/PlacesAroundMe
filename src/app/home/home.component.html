@@ -13,7 +13,6 @@
       </form>
     </div>
   </div>
-
-  <app-loader [loading]="loading" class="row"></app-loader>
   <app-place-list [places]="places"></app-place-list>
+  <app-loader [loading]="loading" [submitted]="submitted" class="row"></app-loader>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegistrationComponent } from '../registration/registration.component';
 import { UserService } from '../services/user.service';
+import { Common } from '../common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navigation',
@@ -14,10 +16,31 @@ export class NavigationComponent implements OnInit {
   isCollapsed: boolean = true;
   user;
   showShare: boolean = navigator['share'] != null ? true : false;
+  locales;
+  selectedLocale;
 
-  constructor(private service: UserService) { }
+  constructor(
+    private service: UserService,
+    private common: Common,
+    private translate: TranslateService,
+  ) {
+    this.locales = common.LOCALES;
+  }
 
   ngOnInit() {
+    if (this.translate.currentLang) {
+      this.selectedLocale = this.translate.currentLang;
+    } else {
+      this.selectedLocale = this.translate.defaultLang;
+    }
+
+    this.translate.onLangChange.subscribe({
+      next: (data) => {
+        this.selectedLocale = data.lang;
+      },
+      error: () => { },
+      complete: () => { }
+    });
     this.authState();
   }
 
@@ -56,6 +79,10 @@ export class NavigationComponent implements OnInit {
         .then(() => { })
         .catch((error) => { });
     }
+  }
+
+  changeLocale(locale) {
+    this.translate.use(locale.key);
   }
 
 }

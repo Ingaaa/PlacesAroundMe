@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   NgbCollapseModule, NgbTooltipModule, NgbCarouselModule,
-  NgbModalModule, NgbTabsetModule
+  NgbModalModule, NgbTabsetModule, NgbDropdownModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { } from '@types/googlemaps';
@@ -71,6 +71,7 @@ const appRoutes: Routes = [
     NgbCarouselModule.forRoot(),
     NgbModalModule.forRoot(),
     NgbTabsetModule.forRoot(),
+    NgbDropdownModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
     ),

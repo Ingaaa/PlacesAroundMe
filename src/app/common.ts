@@ -52,6 +52,13 @@ export class Common {
         'default_error_text': 'Radās nezināma kļūda.'
     };
 
+    readonly LOCALES = [
+        { 'key': 'lv', 'value': 'LV' },
+        { 'key': 'en', 'value': 'EN' }
+    ];
+
+    readonly DEFAULT_LOCALE = this.LOCALES[1];
+
     getErrorText(key): string {
         if (this.authErrors[key] != null) {
             return this.authErrors[key];

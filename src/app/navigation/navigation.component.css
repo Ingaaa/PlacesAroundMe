@@ -24,7 +24,7 @@
     background-color: var(--pink);
 }
 
-.navbar a.nav-link:hover, .navbar a.nav-link:active, .navbar a.nav-link.active {
+.navbar a.nav-link:hover, .navbar a.nav-link:active, .navbar a.nav-link.active, .navbar .dropdown-menu a:hover, .navbar .dropdown-menu a:active {
     background-color: var(--yellow);
     color: var(--purple);
 }
@@ -40,4 +40,12 @@ nav .navbar-nav .nav-link, nav .navbar-brand, nav .navbar-toggler {
 
 .share-item {
     border-right: 1px solid white;
+}
+
+.dropdown-menu {
+    padding: 0px;
+    border-radius: 0px;
+    border: none;
+    margin-top: 0px;
+    background-color: var(--purple);
 }

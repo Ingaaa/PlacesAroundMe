@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md fixed-top">
-  <a class="navbar-brand text-uppercase" routerLink="/sakums" i18n="@@title">
+  <a class="navbar-brand text-uppercase" routerLink="/sakums">
     <i class="fas fa-globe"></i>
-    Places around me</a>
+    <span [translate]="'places.around.me'"></span>
+  </a>
   <button class="navbar-toggler navbar-toggler-right" type="button" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarContent"
     (click)="toggleMenu()" aria-label="Izvēlne">
     <i class="fas fa-bars"></i>
@@ -10,15 +11,13 @@
   <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarContent">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link nav-icon text-uppercase" routerLink="/sakums" routerLinkActive="active" i18n="@@home">
-          Home
-        </a>
+        <a class="nav-link nav-icon text-uppercase" routerLink="/sakums" routerLinkActive="active" [translate]="'home'"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-uppercase" routerLink="/vietas" routerLinkActive="active" i18n="@@search">Find places</a>
+        <a class="nav-link text-uppercase" routerLink="/vietas" routerLinkActive="active" [translate]="'search'"></a>
       </li>
       <li class="nav-item" *ngIf="logedIn">
-        <a class="nav-link text-uppercase" routerLink="/saraksti" routerLinkActive="active" i18n="@@myPlaces">My places</a>
+        <a class="nav-link text-uppercase" routerLink="/saraksti" routerLinkActive="active" [translate]="'my.places'"></a>
       </li>
     </ul>
     <ul class=" navbar-nav ml-auto ">
@@ -27,16 +26,29 @@
           <i class="fas fa-share-alt-square"></i>
         </a>
       </li>
+
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle text-uppercase" data-toggle="dropdown" id="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false" ngbDropdownToggle>{{selectedLocale}}</a>
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdown">
+          <a class="dropdown-item" *ngFor="let locale of locales" (click)=changeLocale(locale)>
+            {{locale.value}}
+          </a>
+        </div>
+      </li>
+
       <li class="nav-item" *ngIf="!logedIn">
         <a class="nav-link nav-login text-uppercase" (click)="openRegistartion()">
           <i class="fas fa-sign-in-alt "></i>
-          <span i18n="@@login">Login</span>/
-          <span i18n="@@register">Register</span>
+          <span [translate]="'login'"></span>/
+          <span [translate]="'register'"></span>
         </a>
       </li>
       <li class="nav-item" *ngIf="logedIn">
-        <a class="nav-link nav-login text-uppercase" (click)="logOut()" i18n="@@logout">
-          <i class="fas fa-sign-out-alt"></i>Logout</a>
+        <a class="nav-link nav-login text-uppercase" (click)="logOut()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span [translate]="'logout'"></span>
+        </a>
       </li>
     </ul>
   </div>

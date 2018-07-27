@@ -13,6 +13,9 @@
         <i *ngIf="list.key === 'toVisit'" class="fas fa-map-marker wh"></i>
         <i *ngIf="list.key === 'visited'" class="fas fa-camera-retro wh"></i>
       </button>
+      <!-- <button class="btn btn-primary" (click)="add()">
+        Add
+      </button> -->
     </div>
 
     <div *ngIf="!loaded" class="col-md-12" style="min-height: 21px;"></div>
@@ -29,12 +32,13 @@
         <i class="fas fa-link"></i>
         <a [href]="place.website" target="_blank ">{{place.website}}</a>
       </div>
-      <div class="col-md-12" *ngIf="place.opening_hours && place.opening_hours.open_now" i18n="@@open">
+      <div class="col-md-12" *ngIf="place.opening_hours && place.opening_hours.open_now">
         <i class="fas fa-clock"></i>
-        Open
+        <span [translate]="'open'"></span>
       </div>
       <div class="col-md-12" *ngIf="place.opening_hours && !place.opening_hours.open_now">
-        <i class="fas fa-clock" i18n="@@closed"></i>Closed
+        <i class="fas fa-clock"></i>
+        <span [translate]="'closed'"></span>
       </div>
 
       <div *ngIf="place.rating" class="col-md-12" property="aggregateRating" typeof="AggregateRating">
@@ -61,7 +65,7 @@
 
       <div *ngIf="place.reviews && place.reviews.length>0" class="col-md-12">
         <div class="dividor col-md-12"></div>
-        <h3 i18n="@@reviews">Reviews</h3>
+        <h3 [translate]="'reviews'"></h3>
         <div class="card" *ngFor="let review of place.reviews" property="review" typeof="Review">
           <div class="card-body">
             <div class="col-md-12" property="author" typeof="Person">

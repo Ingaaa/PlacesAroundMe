@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Common } from './common';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,7 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
+  constructor(
+    private translate: TranslateService,
+    private common: Common
+  ) {
+    translate.setDefaultLang(common.DEFAULT_LOCALE.key);
   }
 }

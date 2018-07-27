@@ -135,7 +135,7 @@ export class PlaceComponent implements OnInit {
     }
   }
 
-  createJsonLd() {
-
+  add() {
+    this.userService.addToHomeList(this.place);
   }
 }

@@ -92,4 +92,22 @@ export class UserService {
     getHomeList() {
         return this.homeListCollection.valueChanges();
     }
+
+    addToHomeList(place) {
+        let photo;
+        if (place.photos && place.photos.length > 0) {
+            photo = place.photos[0].getUrl({ maxHeight: 100 });
+        }
+        this.homeListCollection.doc(place.place_id).set({
+            'place_id': place.place_id,
+            'photo': photo ? photo : null,
+            'rating': place.rating,
+            'name': place.name,
+            'formatted_address': place.formatted_address
+        });
+    }
+
+    deleteFromHomeList(ID) {
+        this.homeListCollection.doc(ID).delete();
+    }
 }

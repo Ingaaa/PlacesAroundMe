@@ -21,7 +21,7 @@ export class PlacePhotoComponent implements OnInit {
     if (this.place.photo) {
       this.photo = this.place.photo;
     } else if ((this.photos != null) && this.photos.length > 0) {
-      this.photo = this.photos[0].getUrl({ maxHeight: 120 });
+      this.photo = this.photos[0].getUrl({ maxHeight: 180 });
     }
   }
 

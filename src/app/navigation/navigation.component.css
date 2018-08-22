@@ -1,3 +1,7 @@
+nav.navbar {
+    z-index: 999;
+}
+
 .navbar {
     background-color: var(--purple);
     padding: 0px;

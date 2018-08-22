@@ -1,5 +1,4 @@
 <div class="place-image">
-  <img *ngIf="photo" property="photo" [lazyLoad]="photo" [offset]="300" class="rounded-circle" alt="{{place.name}}" height="100"
-    width="100">
+  <img *ngIf="photo" property="photo" [lazyLoad]="photo" [offset]="300" alt="{{place.name}}" height="150">
   <i *ngIf="!photo" class="fas fa-globe"></i>
 </div>

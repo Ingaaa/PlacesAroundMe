@@ -85,26 +85,8 @@
 }
 
 .stopLoading>.cs-loader-inner label, .stopLoading {
-    animation: disappear .6s linear 1;
-    animation-fill-mode: both;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
     margin-top: -70px;
     z-index: -999;
-}
-
-@-webkit-keyframes disappear {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes disappear {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }

@@ -1,8 +1,14 @@
 <div class="placeList row">
-  <div class="col-lg-3 col-md-6 col-sm-6 col-12 place-card text-center p-3" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}"
+
+  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 place-card" *ngFor="let place of places" routerLink="/vieta/{{place.place_id}}"
     vocab="http://schema.org/" typeof="Place">
-    <h4 class="display-5" property="name">{{place.name}}</h4>
-    <p *ngIf="place.formatted_address" class="lead" property="address">{{formatAddress(place.formatted_address)}}</p>
-    <app-place-photo [place]="place"></app-place-photo>
+    <div class="details-container">
+      <app-place-photo [place]="place"></app-place-photo>
+      <div class="details p-3">
+        <h4 class="display-6" property="name">{{place.name}}</h4>
+        <p *ngIf="place.formatted_address" class="details-address" property="address">{{formatAddress(place.formatted_address)}}</p>
+      </div>
+    </div>
   </div>
+
 </div>

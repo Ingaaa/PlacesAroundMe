@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { Common } from '../common';
 
 @Component({
@@ -23,15 +24,16 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private service: UserService,
-    private common: Common
+    private common: Common,
+    private authService: AuthService
   ) { }
 
   register() {
     this.clearErrors();
     if (this.rForm.password === this.rForm.password2) {
-      this.service.register(this.rForm.email, this.rForm.password).then((data) => {
+      this.authService.register(this.rForm.email, this.rForm.password).then((data) => {
         this.modalRef.close();
-        this.service.createUserLists(data.uid);
+        this.service.createUserLists(data.user.uid);
       }, (error) => {
         this.rError = this.common.getErrorText(error.code);
       });
@@ -42,16 +44,24 @@ export class RegistrationComponent implements OnInit {
 
   login() {
     this.clearErrors();
-    this.service.signIn(this.sForm.email, this.sForm.password).then((data) => {
+    this.authService.signIn(this.sForm.email, this.sForm.password).then((data) => {
       this.modalRef.close();
     }, (error) => {
       this.sError = this.common.getErrorText(error.code);
     });
   }
 
+  loginWithGoogle() {
+    this.authService.googleLogin().then((data) => {
+      console.log(data);
+    }, (error) => {
+      console.log(error);
+    });
+
+  }
+
   logOut() {
-    this.service.signOut().then((data) => {
-    }, (error) => { });
+    this.authService.signOut();
   }
 
   clearErrors() {

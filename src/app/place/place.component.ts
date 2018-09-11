@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Common } from '../common';
 import { AppService } from '../services/app.service';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-place',
@@ -35,7 +36,8 @@ export class PlaceComponent implements OnInit {
     private route: ActivatedRoute,
     private common: Common,
     private service: AppService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
     this.route.params.subscribe(params => this.id = params['id']);
   }
@@ -47,7 +49,7 @@ export class PlaceComponent implements OnInit {
       complete: () => { }
     });
 
-    this.userService.authState().subscribe({
+    this.authService.user.subscribe({
       next: (user) => {
         if (user != null && user.uid != null) {
           this.userUID = user.uid;

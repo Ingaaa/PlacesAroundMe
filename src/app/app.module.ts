@@ -6,10 +6,12 @@ import {
   NgbModalModule, NgbTabsetModule, NgbDropdownModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
-import { } from '@types/googlemaps';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { } from 'googlemaps';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
@@ -20,6 +22,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from './../environments/environment';
 import { AppService } from './services/app.service';
 import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 import { Common } from './common';
 
 import { AppComponent } from './app.component';
@@ -41,8 +45,8 @@ const appRoutes: Routes = [
   { path: 'sakums', component: HomeComponent },
   { path: 'vietas', component: PlacesComponent },
   { path: 'vieta/:id', component: PlaceComponent },
-  { path: 'saraksti', component: ListsComponent },
-  { path: 'saraksts/:id', component: ListComponent },
+  { path: 'saraksti', component: ListsComponent, canActivate: [AuthGuard] },
+  { path: 'saraksts/:id', component: ListComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -91,6 +95,7 @@ const appRoutes: Routes = [
   providers: [
     AppService,
     UserService,
+    AuthService,
     Common
   ],
   bootstrap: [AppComponent]

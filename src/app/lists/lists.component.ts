@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-lists',
@@ -12,11 +13,12 @@ export class ListsComponent implements OnInit {
   lists;
 
   constructor(
-    private service: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.service.authState().subscribe({
+    this.authService.user.subscribe({
       next: (user) => {
         if (user != null && user.uid != null) {
           this.userUID = user.uid;
@@ -31,7 +33,7 @@ export class ListsComponent implements OnInit {
   }
 
   getUserLists(userUID) {
-    this.service.getUserLists(userUID).subscribe({
+    this.userService.getUserLists(userUID).subscribe({
       next: (data) => {
         this.lists = data;
       }

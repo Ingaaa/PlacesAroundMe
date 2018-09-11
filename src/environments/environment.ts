@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBuBf18OPxcrayZkKMkEftj8FNHcvEJpwU",
+    apiKey: "AIzaSyANy3wRQmXH7_moW_pK43_Z7_GGUTYhjvM",
     authDomain: "placesaroundme-9b752.firebaseapp.com",
     databaseURL: "https://placesaroundme-9b752.firebaseio.com",
     projectId: "placesaroundme-9b752",

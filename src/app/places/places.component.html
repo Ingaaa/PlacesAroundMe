@@ -84,7 +84,7 @@
 
   <div id="map"></div>
 
-  <app-place-list [places]="places"></app-place-list>
+  <app-place-list class="container-fluid" [places]="places"></app-place-list>
   <button *ngIf="getNextPage" type="button" (click)="getNextPage()" class="btn btn-primary show-more mt-4 mb-4 mx-auto" aria-label="Parādīt vairāk">
     <i class="fas fa-angle-double-down"></i>
   </button>

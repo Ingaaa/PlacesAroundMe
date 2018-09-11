@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { AppService } from '../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,6 +20,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private service: AppService,
     private route: ActivatedRoute
   ) {
@@ -26,7 +28,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.authState().subscribe({
+    this.authService.user.subscribe({
       next: (user) => {
         if (user != null && user.uid != null) {
           this.userUID = user.uid;

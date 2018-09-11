@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegistrationComponent } from '../registration/registration.component';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { Common } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   selectedLocale;
 
   constructor(
-    private service: UserService,
+    private authService: AuthService,
     private common: Common,
     private translate: TranslateService,
   ) {
@@ -45,7 +45,7 @@ export class NavigationComponent implements OnInit {
   }
 
   authState() {
-    this.service.authState().subscribe({
+    this.authService.user.subscribe({
       next: (user) => {
         if (user != null && user.uid != null) {
           this.logedIn = true;

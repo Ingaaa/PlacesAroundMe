@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import * as firebase from 'firebase/app';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable()
 export class UserService {
@@ -14,32 +12,11 @@ export class UserService {
     ];
 
     constructor(
-        private angularFire: AngularFireAuth,
         private afs: AngularFirestore) {
         afs.firestore.settings({ timestampsInSnapshots: true });
         // afs.firestore.enablePersistence();
         this.listsCollection = this.afs.collection<any>('Lists');
         this.homeListCollection = this.afs.collection<any>('HomeList');
-    }
-
-    register(email: string, password: string) {
-        return this.angularFire.auth.createUserWithEmailAndPassword(email, password);
-    }
-
-    signIn(email: string, password: string) {
-        return this.angularFire.auth.signInWithEmailAndPassword(email, password);
-    }
-
-    resetPassword(email: string) {
-        return this.angularFire.auth.sendPasswordResetEmail(email);
-    }
-
-    signOut() {
-        return this.angularFire.auth.signOut();
-    }
-
-    authState() {
-        return this.angularFire.authState;
     }
 
     createUserLists(userUID) {
